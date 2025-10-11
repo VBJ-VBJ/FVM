@@ -1,0 +1,2 @@
+/usr/bin/ar qc libFVM.a  CMakeFiles/FVM.dir/Core/Field.cpp.o CMakeFiles/FVM.dir/LinearSolver/SparseMatrixDIA.cpp.o CMakeFiles/FVM.dir/LinearSolver/Vectorb.cpp.o CMakeFiles/FVM.dir/LinearSolver/GaussSeidelSolver.cpp.o
+/usr/bin/ranlib libFVM.a
