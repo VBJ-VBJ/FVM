@@ -11,34 +11,16 @@
 #include "FVM/LinearSolver/SparseMatrixDIA.h"
 #include "FVM/LinearSolver/GaussSeidelSolver.h"
 #include "FVM/Core/Field.h"
+#include "FVM/I_O/MeshFactory.h"
+#include "FVM/Core/Mesh2D.h"
 #include <iostream>
 
 
 int main()
 {
-    FVM::SparseMatrixDIA A(8,{-1,0,5});
-    FVM::Vectorb b(A.getSize());
-    FVM::Field<double> x(A.getSize(),1.0);
-    
-
-    for (int i = 0;i<8;++i)
-    {
-        A.addCoefficient(i,0,2);
-
-    }
-    A.addCoefficient(1,5,5);
-    A.addCoefficient(1,5,3);
-    b.addValue(6, 2.0);
-    std::cout << "ok" << std::endl ; 
-    A.print();
-    x.print();
-    FVM::GaussSeidelSolver solver;
-    solver.solve(A,b,x);
-
-    std::cout << "-----" << std::endl ;
-    FVM::Field<double> res = A*x-b;
-    res.print();
-
+    FVM::Mesh2D mesh = FVM::uniformMeshing(10, 10, 1.0, 1.0);
+    mesh.save_vtk("mesh_uniform");
+    mesh.show();
 
 }
     

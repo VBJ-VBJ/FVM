@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/FVM/Core/Vertex2D.h
+vector
+-
+iostream
+-
+
+/home/vbj/FVM/src/FVM/Core/Vertex2D.cpp
+FVM/Core/Vertex2D.h
+/home/vbj/FVM/src/FVM/Core/FVM/Core/Vertex2D.h
+fstream
+-
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FVM:  Fichier source de include/FVM/LinearSolver/Vectorb.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">FVM
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_ae0d1880184f501688af4ce93be32525.html">FVM</a></li><li class="navelem"><a class="el" href="dir_c4894882fa8918537a6a689bd8433d1f.html">LinearSolver</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Vectorb.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Vectorb.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *     Créé le : 11 octobre 2025</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *      Auteur : VBJ</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * Description : Classe pour représenter un vecteur de nombres réels dans un système linéaire.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef INCLUDE_FVM_LINEARSOLVER_VECTORD_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define INCLUDE_FVM_LINEARSOLVER_VECTORD_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*    Inclusion des bibliothèques   */</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/* Inclusion des fichiers d&#39;en-tête */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>FVM {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classFVM_1_1Vectorb.html">   21</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classFVM_1_1Vectorb.html">Vectorb</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classFVM_1_1Vectorb.html#aa1a92646ca442ba12f916c4084da3ed4">   26</a></span>&#160;        <a class="code" href="classFVM_1_1Vectorb.html#aa1a92646ca442ba12f916c4084da3ed4">Vectorb</a>() : data_() {}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classFVM_1_1Vectorb.html#aff4a425081f9d2bb8bee8bc1e820247d">   32</a></span>&#160;        <a class="code" href="classFVM_1_1Vectorb.html#aff4a425081f9d2bb8bee8bc1e820247d">Vectorb</a>(<span class="keywordtype">size_t</span> size) : data_(size, 0.0) {}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classFVM_1_1Vectorb.html#ad1f2f678e9422b07db847b85676a5f28">addValue</a>(<span class="keywordtype">size_t</span> i, <span class="keywordtype">double</span> value);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classFVM_1_1Vectorb.html#a12addf9d6a5d9d37c69fb9b5d8c7fb55">getCoefficient</a>(<span class="keywordtype">size_t</span> i) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classFVM_1_1Vectorb.html#af9f97c96bf7bf4522e3d86ffa4923877">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classFVM_1_1Vectorb.html#a2b415424a197d61805033313de05fc99">print</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classFVM_1_1Vectorb.html#a604bb971934926e052b7130b6f0737b8">getNormL2Field</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        std::vector&lt;double&gt; data_;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    };</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif // INCLUDE_FVM_LINEARSOLVER_VECTORD_H</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassFVM_1_1Vectorb_html_af9f97c96bf7bf4522e3d86ffa4923877"><div class="ttname"><a href="classFVM_1_1Vectorb.html#af9f97c96bf7bf4522e3d86ffa4923877">FVM::Vectorb::getSize</a></div><div class="ttdeci">size_t getSize() const</div><div class="ttdoc">Retourne la taille du vecteur.</div><div class="ttdef"><b>Definition:</b> Vectorb.cpp:37</div></div>
+<div class="ttc" id="aclassFVM_1_1Vectorb_html"><div class="ttname"><a href="classFVM_1_1Vectorb.html">FVM::Vectorb</a></div><div class="ttdef"><b>Definition:</b> Vectorb.h:21</div></div>
+<div class="ttc" id="aclassFVM_1_1Vectorb_html_aff4a425081f9d2bb8bee8bc1e820247d"><div class="ttname"><a href="classFVM_1_1Vectorb.html#aff4a425081f9d2bb8bee8bc1e820247d">FVM::Vectorb::Vectorb</a></div><div class="ttdeci">Vectorb(size_t size)</div><div class="ttdoc">Constructeur avec taille.</div><div class="ttdef"><b>Definition:</b> Vectorb.h:32</div></div>
+<div class="ttc" id="aclassFVM_1_1Vectorb_html_a2b415424a197d61805033313de05fc99"><div class="ttname"><a href="classFVM_1_1Vectorb.html#a2b415424a197d61805033313de05fc99">FVM::Vectorb::print</a></div><div class="ttdeci">void print() const</div><div class="ttdoc">Affiche le vecteur (pour le débogage).</div><div class="ttdef"><b>Definition:</b> Vectorb.cpp:43</div></div>
+<div class="ttc" id="aclassFVM_1_1Vectorb_html_a604bb971934926e052b7130b6f0737b8"><div class="ttname"><a href="classFVM_1_1Vectorb.html#a604bb971934926e052b7130b6f0737b8">FVM::Vectorb::getNormL2Field</a></div><div class="ttdeci">double getNormL2Field() const</div><div class="ttdoc">Calcule la norme L2 du vecteur.</div><div class="ttdef"><b>Definition:</b> Vectorb.cpp:51</div></div>
+<div class="ttc" id="aclassFVM_1_1Vectorb_html_aa1a92646ca442ba12f916c4084da3ed4"><div class="ttname"><a href="classFVM_1_1Vectorb.html#aa1a92646ca442ba12f916c4084da3ed4">FVM::Vectorb::Vectorb</a></div><div class="ttdeci">Vectorb()</div><div class="ttdoc">Constructeur par défaut.</div><div class="ttdef"><b>Definition:</b> Vectorb.h:26</div></div>
+<div class="ttc" id="aclassFVM_1_1Vectorb_html_a12addf9d6a5d9d37c69fb9b5d8c7fb55"><div class="ttname"><a href="classFVM_1_1Vectorb.html#a12addf9d6a5d9d37c69fb9b5d8c7fb55">FVM::Vectorb::getCoefficient</a></div><div class="ttdeci">double getCoefficient(size_t i) const</div><div class="ttdoc">Retourne la valeur du coefficient à un index donné.</div><div class="ttdef"><b>Definition:</b> Vectorb.cpp:26</div></div>
+<div class="ttc" id="aclassFVM_1_1Vectorb_html_ad1f2f678e9422b07db847b85676a5f28"><div class="ttname"><a href="classFVM_1_1Vectorb.html#ad1f2f678e9422b07db847b85676a5f28">FVM::Vectorb::addValue</a></div><div class="ttdeci">void addValue(size_t i, double value)</div><div class="ttdoc">Ajoute une valeur à l'élément i du vecteur.</div><div class="ttdef"><b>Definition:</b> Vectorb.cpp:17</div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

@@ -43,8 +43,8 @@ void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, F
         }
         x = x_next;
         res = (A*x-b).getNormL2Field()/b.getNormL2Field();
-        std::cout << res << std::endl;
+        std::cout << "res = " << res << std::endl;
         x.print();
-        it++;
+        it++; 
     }   
 }

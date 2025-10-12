@@ -1,0 +1,127 @@
+/*
+ * Mesh2D.cpp
+ *
+*/
+
+/* Inclusion du fichier d'en tête  */
+#include "FVM/Core/Mesh2D.h"
+
+/*    Inclusion des bibliothèques   */
+#include <fstream>
+
+/*    Autres fichiers d'en-tête     */
+
+
+FVM::VertexList FVM::Mesh2D::getVertexList() const
+{
+	return vertexList_;
+}
+
+
+void FVM::Mesh2D::show() const
+{
+
+	for (auto& vertex: vertexList_)
+	{
+		std::cout << vertex << std::endl;
+	}
+}
+
+
+double FVM::Mesh2D::getdeltax_w(size_t const& index) const
+{
+	if (index - (index / (Nx_ + 1)) * (Nx_ + 1) == 0)
+	{
+		return 0.0; // Bord gauche du domaine.
+	}
+	return vertexList_[index].getX() - vertexList_[index - 1].getX();
+}
+
+
+double FVM::Mesh2D::getdeltay_n(size_t const& index) const
+{
+	if (index >= (Nx_ + 1) * Ny_)
+	{
+		return 0.0; // Bord haut du domaine.
+	}
+	return vertexList_[index + (Nx_ + 1)].getY() - vertexList_[index].getY();
+}
+
+
+double FVM::Mesh2D::getdeltax_e(size_t const& index) const
+{
+	if (index - (index / (Nx_ + 1)) * (Nx_ + 1) - Nx_ == 0)
+	{
+		return 0.0; // Bord droit du domaine.
+	}
+	return vertexList_[index + 1].getX() - vertexList_[index].getX();
+}
+
+
+double FVM::Mesh2D::getdeltay_s(size_t const& index) const
+{
+	if (index < (Nx_ + 1))
+	{
+		return 0.0; // Bord bas du domaine.
+	}
+	return vertexList_[index].getY() - vertexList_[index - (Nx_ + 1)].getY();
+}
+
+
+double FVM::Mesh2D::getDeltax(size_t const& index) const
+{
+	return (getdeltax_w(index) + getdeltax_e(index)) / 2;
+}
+
+
+double FVM::Mesh2D::getDeltay(size_t const& index) const
+{
+	return (getdeltay_n(index) + getdeltay_s(index)) / 2;
+}
+
+
+size_t FVM::Mesh2D::getNx() const
+{
+	return Nx_;
+}
+
+
+size_t FVM::Mesh2D::getNy() const
+{
+	return Ny_;
+}
+
+
+void FVM::Mesh2D::save_vtk(std::string const& name, std::string const& path) const
+{
+	std::ofstream file;
+	if (!path.empty())
+	{
+		file.open(path+name + ".vtk");
+	}
+	else
+	{ 
+		file.open(name + ".vtk");
+	}
+	
+	if (!file.is_open())
+	{
+		std::cerr << "Impossible d'ecrire dans le fichier de sortie." << std::endl; 
+	}
+	else
+	{
+		// header du fichier .vtk : 
+		file << "# vtk DataFile Version 2.0 \n";
+		file << "Maillage centre - face avec donnees de cellules \n";
+		file << "ASCII \n";
+		file << "DATASET STRUCTURED_GRID \n";
+		file << "DIMENSIONS " << Nx_ + 1 << " " << Ny_ + 1 << " " << 1 << std::endl;
+		file << "POINTS " << vertexList_.size() << " double" << std::endl;
+		for (auto& vertex : vertexList_)
+		{
+			file << vertex;
+		}
+		file.close();
+	}
+	std::cout << "Le fichier a correctement ete enregistre." << std::endl;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FVM:  Fichier source de include/FVM/LinearSolver/SparseMatrixDIA.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">FVM
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_ae0d1880184f501688af4ce93be32525.html">FVM</a></li><li class="navelem"><a class="el" href="dir_c4894882fa8918537a6a689bd8433d1f.html">LinearSolver</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">SparseMatrixDIA.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * SparseMatrixDIA.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *     Créé le : 11 octobre 2025</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *      Auteur : VBJ</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * Description : Classe représentant la matrice A (matrice creuse au format DIA) dans un système linéaire Ax = b.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef FVM_LINEARSOLVER_SPARSEMATRIXDIA_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define FVM_LINEARSOLVER_SPARSEMATRIXDIA_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*    Inclusion des bibliothèques   */</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span> <span class="comment">// Pour size_t.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/* Inclusion des fichiers d&#39;en-tête */</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;Vectorb.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>FVM {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classFVM_1_1SparseMatrixDIA.html">   26</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classFVM_1_1SparseMatrixDIA.html">SparseMatrixDIA</a> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classFVM_1_1SparseMatrixDIA.html#a4e97fa408d1bc2eea6bd4fc0a17d657a">   31</a></span>&#160;        <a class="code" href="classFVM_1_1SparseMatrixDIA.html#a4e97fa408d1bc2eea6bd4fc0a17d657a">SparseMatrixDIA</a>() : N_(0), N_diag_(0) {}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="classFVM_1_1SparseMatrixDIA.html#a4e97fa408d1bc2eea6bd4fc0a17d657a">SparseMatrixDIA</a>(<span class="keywordtype">size_t</span> N, std::vector&lt;int&gt; offsets);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classFVM_1_1SparseMatrixDIA.html#aa45e6479bdac79f488256776b1298a09">getCoefficient</a>(<span class="keywordtype">size_t</span> i, <span class="keywordtype">int</span> offset) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classFVM_1_1SparseMatrixDIA.html#a7ace8a44d6e44a6180672b4e042d6a19">addCoefficient</a>(<span class="keywordtype">size_t</span> i, <span class="keywordtype">int</span> offset, <span class="keywordtype">double</span> value);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classFVM_1_1SparseMatrixDIA.html#a07b95c10726babd42ec3f20720738645">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classFVM_1_1SparseMatrixDIA.html#a4a1da4edc4f2894c0bee6c0d567593b3">print</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        std::vector&lt;int&gt; <a class="code" href="classFVM_1_1SparseMatrixDIA.html#a151a9b688d8102a71a579862063188b3">getOffsets</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">size_t</span> N_;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">size_t</span> N_diag_;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        std::vector&lt;std::vector&lt;double&gt;&gt; data_;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        std::vector&lt;int&gt; offsets_;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        std::unordered_map&lt;int, size_t&gt; offset2Index;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    };</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif // FVM_LINEAR_SOLVER_SPARSEMATRIXDIA_H</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassFVM_1_1SparseMatrixDIA_html"><div class="ttname"><a href="classFVM_1_1SparseMatrixDIA.html">FVM::SparseMatrixDIA</a></div><div class="ttdef"><b>Definition:</b> SparseMatrixDIA.h:26</div></div>
+<div class="ttc" id="aclassFVM_1_1SparseMatrixDIA_html_a7ace8a44d6e44a6180672b4e042d6a19"><div class="ttname"><a href="classFVM_1_1SparseMatrixDIA.html#a7ace8a44d6e44a6180672b4e042d6a19">FVM::SparseMatrixDIA::addCoefficient</a></div><div class="ttdeci">void addCoefficient(size_t i, int offset, double value)</div><div class="ttdoc">Ajoute une valeur à la matrice.</div><div class="ttdef"><b>Definition:</b> SparseMatrixDIA.cpp:46</div></div>
+<div class="ttc" id="aclassFVM_1_1SparseMatrixDIA_html_a4e97fa408d1bc2eea6bd4fc0a17d657a"><div class="ttname"><a href="classFVM_1_1SparseMatrixDIA.html#a4e97fa408d1bc2eea6bd4fc0a17d657a">FVM::SparseMatrixDIA::SparseMatrixDIA</a></div><div class="ttdeci">SparseMatrixDIA()</div><div class="ttdoc">Constructeur par défaut.</div><div class="ttdef"><b>Definition:</b> SparseMatrixDIA.h:31</div></div>
+<div class="ttc" id="aclassFVM_1_1SparseMatrixDIA_html_a07b95c10726babd42ec3f20720738645"><div class="ttname"><a href="classFVM_1_1SparseMatrixDIA.html#a07b95c10726babd42ec3f20720738645">FVM::SparseMatrixDIA::getSize</a></div><div class="ttdeci">size_t getSize() const</div><div class="ttdoc">Retourne la taille de la matrice.</div><div class="ttdef"><b>Definition:</b> SparseMatrixDIA.cpp:77</div></div>
+<div class="ttc" id="aclassFVM_1_1SparseMatrixDIA_html_a151a9b688d8102a71a579862063188b3"><div class="ttname"><a href="classFVM_1_1SparseMatrixDIA.html#a151a9b688d8102a71a579862063188b3">FVM::SparseMatrixDIA::getOffsets</a></div><div class="ttdeci">std::vector&lt; int &gt; getOffsets() const</div><div class="ttdoc">Récupérer le vecteur offsets.</div><div class="ttdef"><b>Definition:</b> SparseMatrixDIA.cpp:82</div></div>
+<div class="ttc" id="aclassFVM_1_1SparseMatrixDIA_html_a4a1da4edc4f2894c0bee6c0d567593b3"><div class="ttname"><a href="classFVM_1_1SparseMatrixDIA.html#a4a1da4edc4f2894c0bee6c0d567593b3">FVM::SparseMatrixDIA::print</a></div><div class="ttdeci">void print() const</div><div class="ttdoc">Affiche la matrice DIA (pour le débogage).</div><div class="ttdef"><b>Definition:</b> SparseMatrixDIA.cpp:66</div></div>
+<div class="ttc" id="aclassFVM_1_1SparseMatrixDIA_html_aa45e6479bdac79f488256776b1298a09"><div class="ttname"><a href="classFVM_1_1SparseMatrixDIA.html#aa45e6479bdac79f488256776b1298a09">FVM::SparseMatrixDIA::getCoefficient</a></div><div class="ttdeci">double getCoefficient(size_t i, int offset) const</div><div class="ttdoc">Ajoute une valeur à la matrice.</div><div class="ttdef"><b>Definition:</b> SparseMatrixDIA.cpp:30</div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

@@ -1,0 +1,117 @@
+\hypertarget{classFVM_1_1Mesh2D}{}\doxysection{Référence de la classe F\+VM\+::Mesh2D}
+\label{classFVM_1_1Mesh2D}\index{FVM::Mesh2D@{FVM::Mesh2D}}
+\doxysubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_a0bc00cdd5863c0e45e82a97fdc46c34a}\label{classFVM_1_1Mesh2D_a0bc00cdd5863c0e45e82a97fdc46c34a}} 
+\mbox{\hyperlink{classFVM_1_1Mesh2D_a0bc00cdd5863c0e45e82a97fdc46c34a}{Mesh2D}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructeur par défaut. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classFVM_1_1Mesh2D_aa17c893717c8f01caef473bbc9c81f1b}{save\+\_\+vtk}} (std\+::string const \&name, std\+::string const \&path=\char`\"{}\char`\"{}) const
+\begin{DoxyCompactList}\small\item\em Sauvegarde le maillage dans un fichier au format V\+TK (Paraview). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classFVM_1_1Mesh2D_a1ea27b77389b6041a16feb8a5c2720e3}{getdeltax\+\_\+w}} (size\+\_\+t const \&index) const
+\begin{DoxyCompactList}\small\item\em Renvoie l\textquotesingle{}intervalle entre le sommet donné par l\textquotesingle{}index et le sommet dans une direction donnée. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classFVM_1_1Mesh2D_a48abdac661dee21a075c3c5406e49d01}{getdeltay\+\_\+n}} (size\+\_\+t const \&index) const
+\begin{DoxyCompactList}\small\item\em Renvoie l\textquotesingle{}intervalle entre le sommet donné par l\textquotesingle{}index et le sommet dans une direction donnée. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_a11e28386ebe0f0e730def8e9c5c6ef87}\label{classFVM_1_1Mesh2D_a11e28386ebe0f0e730def8e9c5c6ef87}} 
+double {\bfseries getdeltax\+\_\+e} (size\+\_\+t const \&index) const
+\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_ab2d7079e700e98e59f40d6c5b2790471}\label{classFVM_1_1Mesh2D_ab2d7079e700e98e59f40d6c5b2790471}} 
+double {\bfseries getdeltay\+\_\+s} (size\+\_\+t const \&index) const
+\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_ade87f9710565499cfe34c2ce75859639}\label{classFVM_1_1Mesh2D_ade87f9710565499cfe34c2ce75859639}} 
+double {\bfseries get\+Deltax} (size\+\_\+t const \&index) const
+\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_ae0a5ba86f32e0393e32ca1be8b0d22f3}\label{classFVM_1_1Mesh2D_ae0a5ba86f32e0393e32ca1be8b0d22f3}} 
+double {\bfseries get\+Deltay} (size\+\_\+t const \&index) const
+\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_a139e0381a13419189b790b28fab4e421}\label{classFVM_1_1Mesh2D_a139e0381a13419189b790b28fab4e421}} 
+Vertex\+List \mbox{\hyperlink{classFVM_1_1Mesh2D_a139e0381a13419189b790b28fab4e421}{get\+Vertices\+List}} () const
+\begin{DoxyCompactList}\small\item\em Renvoie la liste des sommets du maillage. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_ac044bb67d281679a06417f04e9f07275}\label{classFVM_1_1Mesh2D_ac044bb67d281679a06417f04e9f07275}} 
+size\+\_\+t \mbox{\hyperlink{classFVM_1_1Mesh2D_ac044bb67d281679a06417f04e9f07275}{get\+Nx}} () const
+\begin{DoxyCompactList}\small\item\em Renvoie le nombre de mailles dans la direction x. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_ad0feeea1658b275a2bb28bd336895834}\label{classFVM_1_1Mesh2D_ad0feeea1658b275a2bb28bd336895834}} 
+size\+\_\+t \mbox{\hyperlink{classFVM_1_1Mesh2D_ad0feeea1658b275a2bb28bd336895834}{get\+Ny}} () const
+\begin{DoxyCompactList}\small\item\em Renvoie le nombre de mailles dans la direction y. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_ad46a4a33edb20295cfb66e8b3512c22f}\label{classFVM_1_1Mesh2D_ad46a4a33edb20295cfb66e8b3512c22f}} 
+void \mbox{\hyperlink{classFVM_1_1Mesh2D_ad46a4a33edb20295cfb66e8b3512c22f}{show}} () const
+\begin{DoxyCompactList}\small\item\em Affiche tous les sommets du maillage sur la console (debug). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_a1ea27b77389b6041a16feb8a5c2720e3}\label{classFVM_1_1Mesh2D_a1ea27b77389b6041a16feb8a5c2720e3}} 
+\index{FVM::Mesh2D@{FVM::Mesh2D}!getdeltax\_w@{getdeltax\_w}}
+\index{getdeltax\_w@{getdeltax\_w}!FVM::Mesh2D@{FVM::Mesh2D}}
+\doxysubsubsection{\texorpdfstring{getdeltax\_w()}{getdeltax\_w()}}
+{\footnotesize\ttfamily double F\+V\+M\+::\+Mesh2\+D\+::getdeltax\+\_\+w (\begin{DoxyParamCaption}\item[{size\+\_\+t const \&}]{index }\end{DoxyParamCaption}) const}
+
+
+
+Renvoie l\textquotesingle{}intervalle entre le sommet donné par l\textquotesingle{}index et le sommet dans une direction donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em index} & Index du sommet. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+L\textquotesingle{}intervalle entre le sommet donné par l\textquotesingle{}index et le sommet dans une direction donnée. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Les directions sont \+:
+\begin{DoxyItemize}
+\item deltax\+\_\+w \+: direction ouest (gauche).
+\item deltax\+\_\+e \+: direction est (droite).
+\item deltay\+\_\+n \+: direction nord (haut).
+\item deltay\+\_\+s \+: direction sud (bas). 
+\end{DoxyItemize}
+\end{DoxyNote}
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_a48abdac661dee21a075c3c5406e49d01}\label{classFVM_1_1Mesh2D_a48abdac661dee21a075c3c5406e49d01}} 
+\index{FVM::Mesh2D@{FVM::Mesh2D}!getdeltay\_n@{getdeltay\_n}}
+\index{getdeltay\_n@{getdeltay\_n}!FVM::Mesh2D@{FVM::Mesh2D}}
+\doxysubsubsection{\texorpdfstring{getdeltay\_n()}{getdeltay\_n()}}
+{\footnotesize\ttfamily double F\+V\+M\+::\+Mesh2\+D\+::getdeltay\+\_\+n (\begin{DoxyParamCaption}\item[{size\+\_\+t const \&}]{index }\end{DoxyParamCaption}) const}
+
+
+
+Renvoie l\textquotesingle{}intervalle entre le sommet donné par l\textquotesingle{}index et le sommet dans une direction donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em index} & Index du sommet. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+L\textquotesingle{}intervalle entre le sommet donné par l\textquotesingle{}index et le sommet dans une direction donnée. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Les directions sont \+:
+\begin{DoxyItemize}
+\item deltax\+\_\+w \+: direction ouest (gauche).
+\item deltax\+\_\+e \+: direction est (droite).
+\item deltay\+\_\+n \+: direction nord (haut).
+\item deltay\+\_\+s \+: direction sud (bas). 
+\end{DoxyItemize}
+\end{DoxyNote}
+\mbox{\Hypertarget{classFVM_1_1Mesh2D_aa17c893717c8f01caef473bbc9c81f1b}\label{classFVM_1_1Mesh2D_aa17c893717c8f01caef473bbc9c81f1b}} 
+\index{FVM::Mesh2D@{FVM::Mesh2D}!save\_vtk@{save\_vtk}}
+\index{save\_vtk@{save\_vtk}!FVM::Mesh2D@{FVM::Mesh2D}}
+\doxysubsubsection{\texorpdfstring{save\_vtk()}{save\_vtk()}}
+{\footnotesize\ttfamily void F\+V\+M\+::\+Mesh2\+D\+::save\+\_\+vtk (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{path = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption}) const}
+
+
+
+Sauvegarde le maillage dans un fichier au format V\+TK (Paraview). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em name} & Le nom du fichier de sortie (sans l\textquotesingle{}extension). \\
+\hline
+{\em path} & Le chemin du dossier où enregistrer le fichier. Par défaut, le fichier est enregistré dans le répertoire courant. \\
+\hline
+\end{DoxyParams}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+include/\+F\+V\+M/\+Core/Mesh2\+D.\+h\end{DoxyCompactItemize}
