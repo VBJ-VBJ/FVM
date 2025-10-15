@@ -10,7 +10,7 @@
 #define INCLUDE_FVM_CORE_MESH2D_H
 
 /*    Inclusion des bibliothèques   */
-
+#include <map>
 
 /* Inclusion des fichiers d'en-tête */
 #include "Vertex2D.h"
@@ -111,6 +111,9 @@ namespace FVM {
 
 		/** @brief Liste des sommets du maillage. */
 		VertexList vertexList_; 
+
+		/** @brief Sélections nommées du maillage. */
+		// std::map<std::string, BoundaryPatch> boundaryPatches_;
 	};
 
 }

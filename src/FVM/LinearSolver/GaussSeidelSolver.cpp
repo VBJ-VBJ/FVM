@@ -13,7 +13,7 @@
 /*    Autres fichiers d'en-tête     */
 
 
-void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, Field<double> &x) 
+void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, scalarField &x) 
 {
     if (b.getSize() != x.getSize())
     {
@@ -21,10 +21,10 @@ void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, F
         return ;
     }
 
-    auto x_next{x};
+    scalarField x_next = x;
     double sum_next,sum;
     size_t it{0};
-    double res{(A*x-b).getNormL2Field()/b.getNormL2Field()};
+    double res{(A*x-b).getNormL2Field()/b.getNormL2()};
     while(it < maxIter_ && res > tol_)
     {
         for (size_t i{0}; i < b.getSize(); ++i)
@@ -42,7 +42,7 @@ void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, F
             x_next.setField(i,1/A.getCoefficient(i,0)*( b.getCoefficient(i)-sum_next - sum));
         }
         x = x_next;
-        res = (A*x-b).getNormL2Field()/b.getNormL2Field();
+        res = (A*x-b).getNormL2Field()/b.getNormL2();
         std::cout << "res = " << res << std::endl;
         x.print();
         it++; 

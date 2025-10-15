@@ -1,4 +1,4 @@
-  /*
+/*
  * Field.cpp
  *
 */
@@ -13,13 +13,12 @@
 
 namespace FVM {
 
-  Field<double> operator-(const Vectorb& vec, const Field<double>& field) {
+  scalarField operator-(const Vectorb& vec, const scalarField& field) {
         if (vec.getSize() != field.getSize()) {
-            std::cerr << "Les tailles du vecteur et du champ ne correspondent pas pour la soustraction." << std::endl;
-            return Field<double>(0);
+            throw std::runtime_error("Les tailles du vecteur et du champ ne correspondent pas pour la soustraction.");
         }
 
-        Field<double> result(vec.getSize());
+        scalarField result(field.getMesh());
         for (size_t i = 0; i < vec.getSize(); ++i) {
             result.setField(i, vec.getCoefficient(i) - field.getField(i));
         }
@@ -27,13 +26,12 @@ namespace FVM {
     }
 
 
-    Field<double> operator-(const Field<double>& field, const Vectorb& vec) {
+    scalarField operator-(const scalarField& field, const Vectorb& vec) {
         if (vec.getSize() != field.getSize()) {
-            std::cerr << "Les tailles du vecteur et du champ ne correspondent pas pour la soustraction." << std::endl;
-            return Field<double>(0);
+            throw std::runtime_error("Les tailles du vecteur et du champ ne correspondent pas pour la soustraction.");
         }
 
-        Field<double> result(vec.getSize());
+        scalarField result(field.getMesh());
         for (size_t i = 0; i < vec.getSize(); ++i) {
             result.setField(i, -vec.getCoefficient(i) + field.getField(i));
         }
@@ -41,13 +39,12 @@ namespace FVM {
     }
 
 
-    Field<double> operator*(const SparseMatrixDIA& mat, const Field<double>& field) {
+    scalarField operator*(const SparseMatrixDIA& mat, const scalarField& field) {
         if (mat.getSize() != field.getSize()) {
-            std::cerr << "Les tailles de la matrice et du champ ne correspondent pas pour la multiplication." << std::endl;
-            return Field<double>(0);
+            throw std::runtime_error("Les tailles de la matrice et du champ ne correspondent pas pour la multiplication.");
         }
 
-        Field<double> result(field.getSize());
+        scalarField result(field.getMesh()) ;
         for (size_t i = 0; i < field.getSize(); ++i) {
             double sum = 0.0;
             for (auto& offset : mat.getOffsets()) {

@@ -34,7 +34,7 @@ namespace FVM {
          * @param x Vecteur x.
          * @note Le vecteur x doit être initialisé et de la taille du vecteur b.
          */
-        virtual void solve(const SparseMatrixDIA& A, const Vectorb& b, Field<double>& x) override ;
+        virtual void solve(const SparseMatrixDIA& A, const Vectorb& b, scalarField& x) override ;
         
         void setTolerance(double tol) { tol_ = tol; }
         void setMaxIterations(int maxIter) { maxIter_ = maxIter; }

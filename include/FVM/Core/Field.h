@@ -18,24 +18,18 @@
 /* Inclusion des fichiers d'en-tête */
 #include "FVM/LinearSolver/Vectorb.h"
 #include "FVM/LinearSolver/SparseMatrixDIA.h"
+#include "Mesh2D.h"
 
 namespace FVM {
 
     template<typename T>
     class Field {
     public:
-        /**
-         * @brief Constructeur de base.
-         * @param size Nombre d'éléments.
-         */
-        Field(size_t size) : data_(size) {}
 
         /**
-         * @brief Constructeur avec valeur initiale.
-         * @param size Nombre d'éléments.
-         * @param initialValue Valeur initiale pour chaque élément.
+         * @brief Construction du champ à partir d'un mesh.
          */
-        Field(size_t size, T initialValue) : data_(size, initialValue) {}
+        Field(const Mesh2D& mesh) : mesh_(mesh), data_((mesh.getNx()+1)*(mesh.getNy()+1)) {}
 
         /** 
          * @brief Ajoute un terme à un index donné du champ.
@@ -109,18 +103,44 @@ namespace FVM {
                std::cout << val << " ";
            }
            std::cout << std::endl;
-       }
+        }
+
+        /** 
+         * @brief Retourne l'adresse du mesh associé au champ.
+         */
+        const Mesh2D& getMesh() const {
+            return mesh_;
+        }
+
+       T& operator[](size_t i){
+            if (i < 0 || static_cast<size_t>(i) >= data_.size()){
+                throw std::out_of_range("Index de cellule hors limites.");
+            }
+            return  data_[i];
+        }
+
+        Field& operator=(const Field& other) {
+        if (this != &other) {
+            if (&mesh_ != &other.mesh_) {
+                throw std::runtime_error("Vous ne pouvez pas assigner deux maillages avec deux mesh différents.");
+            }
+            this->data_ = other.data_; 
+        }
+        return *this;
+    }
 
     private:
         std::vector<T> data_;
+        const Mesh2D& mesh_;
     };
 
-    Field<double> operator-(const Vectorb& vec, const Field<double>& field);
+    using scalarField=Field<double>;
 
-    Field<double> operator-(const Field<double>& field, const Vectorb& vec);
+    scalarField operator-(const Vectorb& vec, const scalarField& field);
 
-    Field<double> operator*(const SparseMatrixDIA& mat, const Field<double>& field); 
+    scalarField operator-(const scalarField& field, const Vectorb& vec);
 
+    scalarField operator*(const SparseMatrixDIA& mat, const scalarField& field); 
 }
 
 #endif // INCLUDE_FVM_CORE_FIELD_H

@@ -57,7 +57,7 @@ namespace FVM {
          * @brief Calcule la norme L2 du vecteur.
          * @return La norme L2 du vecteur.
          */
-        double getNormL2Field() const;
+        double getNormL2() const;
     private:
         std::vector<double> data_;
     };

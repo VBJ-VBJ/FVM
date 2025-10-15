@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(FVM_SRC
     # /Core
     ${CMAKE_CURRENT_LIST_DIR}/Core/Field.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Core/Utils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Core/Mesh2D.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Core/Vertex2D.cpp
     # /I_O

@@ -48,7 +48,7 @@ void FVM::Vectorb::print() const {
 }
 
 
-double FVM::Vectorb::getNormL2Field() const
+double FVM::Vectorb::getNormL2() const
         {
             double sum = 0.0;
             for (const auto& val : data_) {
