@@ -21,7 +21,7 @@ namespace FVM{
 
     class LaplacianScheme {
     public:
-        virtual void discretize(SparseMatrixDIA& A, Vectorb& b, const scalarField& phi) = 0;
+        virtual void discretize(SparseMatrixDIA& A, Vectorb& b, const ScalarField& phi) = 0;
     };
 
 }

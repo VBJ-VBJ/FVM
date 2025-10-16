@@ -6,11 +6,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Source files for the FVM library
 set(FVM_SRC
+    # /BoundaryConditions
+    ${CMAKE_CURRENT_LIST_DIR}/BoundaryConditions/DirichletCondition.cpp
     # /Core
     ${CMAKE_CURRENT_LIST_DIR}/Core/Field.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Core/Utils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Core/Mesh2D.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Core/Vertex2D.cpp
+    # /Equations
+    ${CMAKE_CURRENT_LIST_DIR}/Equations/PoissonEquation.cpp
     # /I_O
     ${CMAKE_CURRENT_LIST_DIR}/I_O/MeshFactory.cpp
     # /LinearSolver  

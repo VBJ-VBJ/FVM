@@ -101,6 +101,23 @@ namespace FVM {
 		 * @brief Affiche tous les sommets du maillage sur la console (debug).
 		 */
 		void show() const; 
+
+		/**
+		 * @brief Ajoute un patch.
+		 * @param name Nom du patch.
+		 * @param vertexIDList Liste de l'indice des sommets où s'applique la CL.
+		 */
+		void addBoundaryPatch(const std::string& name, const std::vector<size_t>& verticesIDList);
+
+		/**
+		 * @brief Affiche les patchs (Debug).
+		 */
+		void showBoundaryPatches();
+
+		/**
+		 * @return Les patchs pour les CL.
+		 */
+		std::map<std::string,std::vector<size_t>> getBoundaryPatches() const;
 		
 	private:
 		/** @brief Nombre de mailles par lignes. */
@@ -113,7 +130,7 @@ namespace FVM {
 		VertexList vertexList_; 
 
 		/** @brief Sélections nommées du maillage. */
-		// std::map<std::string, BoundaryPatch> boundaryPatches_;
+		std::map<std::string, std::vector<size_t>> boundaryPatches_;
 	};
 
 }

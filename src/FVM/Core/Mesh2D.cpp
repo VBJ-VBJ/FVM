@@ -125,3 +125,28 @@ void FVM::Mesh2D::save_vtk(std::string const& name, std::string const& path) con
 	}
 	std::cout << "Le fichier a correctement ete enregistre." << std::endl;
 }
+
+
+void FVM::Mesh2D::addBoundaryPatch(const std::string& name, const std::vector<size_t>& verticesIDList){
+	boundaryPatches_.insert({name, verticesIDList});
+}
+
+
+void FVM::Mesh2D::showBoundaryPatches(){
+	for (const auto& [patchName, verticesIDList] : boundaryPatches_) {
+        
+        std::cout << "--- Patch : " << patchName << " ---" << std::endl;
+        
+        std::cout << "Points : { ";
+        for (size_t point : verticesIDList) {
+            std::cout << point << " ";
+        }
+        std::cout << "}" << std::endl;
+    }
+    std::cout << "------------------------------------" << std::endl;
+}
+
+std::map<std::string,std::vector<size_t>> FVM::Mesh2D::getBoundaryPatches() const
+{
+	return boundaryPatches_;
+}

@@ -20,33 +20,36 @@
 
 namespace FVM{
 
-    class PoissonEquation : Equation<scalarField> {
+    class PoissonEquation : Equation<ScalarField> {
     public:
 
         /**
          * @brief Constructeur de l'équation de Poisson.
          * @param phi Le champ scalaire à résoudre.
          * @param source Le champ source.
-         * @param mesh Le maillage associé.
          */
-        PoissonEquation(const scalarField& phi, const scalarField& source, const Mesh2D& mesh) : phi_(phi), source_(source), mesh_(mesh) {};
+        PoissonEquation(const ScalarField& phi, const ScalarField& source) : phi_(phi), source_(source) {};
 
         /**
-         * @brief 
+         * @brief Construit les matrices A et b du sytème linéaire.
+         * @param A Matrice A.
+         * @param b Vecteur source b.
+         * @param phi Champ scalaire à déterminer associé à un maillage.
          */
-        virtual void assemble(SparseMatrixDIA& A, Vectorb& b, const scalarField& phi) override;
+        virtual void assemble(SparseMatrixDIA& A, Vectorb& b, const ScalarField& phi) override;
+
+        /**
+         * @brief Résout le système linéaire Ax = b.
+         */
         virtual void solve() override;
 
     private:
 
         /** @brief Champ scalaire inconnu de l'équation. */
-        const scalarField& phi_; 
+        const ScalarField& phi_; 
         
         /** @brief Terme source de l'équation. */
-        const scalarField& source_;
-
-        /** @brief Maillage associé au domaine physique. */
-        const Mesh2D& mesh_;           
+        const ScalarField& source_;         
     };
 
 }

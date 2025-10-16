@@ -23,12 +23,23 @@
 
 namespace FVM {
 
+    template <typename T>
+    class Field;
+
+    using ScalarField = Field<double>;
+
     class SparseMatrixDIA {
     public:
         /**
          *  @brief Constructeur par défaut.
         */
         SparseMatrixDIA() : N_(0), N_diag_(0) {}
+
+        /**
+         * @brief Constructeur à partir d'un champ scalaire.
+         * @param field Champ à partir duquel on construit la matrice DIA.
+        */
+        SparseMatrixDIA(const Field<double>& field);
 
         /**
          *  @brief Constructeur avec taille et offsets.

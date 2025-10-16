@@ -14,11 +14,14 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
+#include <memory>
+#include <map>
 
 /* Inclusion des fichiers d'en-tête */
 #include "FVM/LinearSolver/Vectorb.h"
 #include "FVM/LinearSolver/SparseMatrixDIA.h"
-#include "Mesh2D.h"
+#include "FVM/Core/Mesh2D.h"
+#include "FVM/BoundaryConditions/DirichletCondition.h"
 
 namespace FVM {
 
@@ -28,8 +31,15 @@ namespace FVM {
 
         /**
          * @brief Construction du champ à partir d'un mesh.
+         * @note Les conditions limites associées aux patchs définis dans le mesh sont fixées comme Dirichlet de 0 par défaut.
          */
-        Field(const Mesh2D& mesh) : mesh_(mesh), data_((mesh.getNx()+1)*(mesh.getNy()+1)) {}
+        Field(const Mesh2D& mesh) : mesh_(mesh), data_((mesh.getNx()+1)*(mesh.getNy()+1)) 
+        {
+            for (const auto& it : mesh_.getBoundaryPatches())
+            {
+                BoundaryConditions_.emplace(it.first, std::make_shared<DirichletCondition>(1.0));
+            }
+        }
 
         /** 
          * @brief Ajoute un terme à un index donné du champ.
@@ -130,17 +140,25 @@ namespace FVM {
     }
 
     private:
+
+        /** @brief Stocke les données en tout points du champ. */
         std::vector<T> data_;
+
+        /** @brief Maillage du domaine physique associé au champ. */
         const Mesh2D& mesh_;
+
+        /** @brief Condition limites associées au patch. */
+        std::map<std::string,std::shared_ptr<BoundaryCondition>> BoundaryConditions_;
+
     };
 
-    using scalarField=Field<double>;
+    using ScalarField=Field<double>;
 
-    scalarField operator-(const Vectorb& vec, const scalarField& field);
+    ScalarField operator-(const Vectorb& vec, const ScalarField& field);
 
-    scalarField operator-(const scalarField& field, const Vectorb& vec);
+    ScalarField operator-(const ScalarField& field, const Vectorb& vec);
 
-    scalarField operator*(const SparseMatrixDIA& mat, const scalarField& field); 
+    ScalarField operator*(const SparseMatrixDIA& mat, const ScalarField& field); 
 }
 
 #endif // INCLUDE_FVM_CORE_FIELD_H

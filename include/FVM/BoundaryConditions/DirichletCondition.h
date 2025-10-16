@@ -10,21 +10,30 @@
 #define INCLUDE_FVM_BOUNDARYCONDITION_DIRICHLETCONDITION_H
 
 /*    Inclusion des bibliothèques   */
+#include <cstddef>
 
 /* Inclusion des fichiers d'en-tête */
-#include "FVM/LinearSolver/SparseMatrixDIA.h"
-#include "FVM/LinearSolver/Vectorb.h"
-#include "FVM/Core/Utils.h"
 #include "FVM/BoundaryConditions/BoundaryCondition.h"
 
 namespace FVM{
 
     class DirichletCondition : public BoundaryCondition {
-public:
+    public:
 
-    DirichletCondition()
+        /** @brief Initialise la valeur de la condition limite. */
+        DirichletCondition(double value) : value_(value) {};
 
-    virtual void apply(SparseMatrixDIA& A, Vectorb& b, size_t i, size_t j) const override;
+        /** 
+         * @brief Applique la condition limite au point donné. 
+         * @param A Matrice A à construire.
+         * @param b Vecteur source b à construire.
+         * @param index Index du noeud où appliquer les CL.
+        */
+        virtual void apply(SparseMatrixDIA& A, Vectorb& b, size_t index) const override;
+
+    private: 
+        double value_ ; 
+
 };
 
 }

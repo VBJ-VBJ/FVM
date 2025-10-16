@@ -10,7 +10,7 @@
 #include <cstdlib> // Pour std::abs.
 
 /*    Autres fichiers d'en-tête     */
-
+#include "FVM/Core/Field.h"
 
 FVM::SparseMatrixDIA::SparseMatrixDIA(size_t N, std::vector<int> offsets)
 {
@@ -26,6 +26,15 @@ FVM::SparseMatrixDIA::SparseMatrixDIA(size_t N, std::vector<int> offsets)
         throw std::invalid_argument("Les offsets des diagonales contiennent des doublons.");
     }
 }
+
+FVM::SparseMatrixDIA::SparseMatrixDIA(const FVM::ScalarField& field) 
+: SparseMatrixDIA(field.getSize(),{-static_cast<int>(field.getMesh().getNx()), // Coefficients Sud.
+                                    -1, // Coefficients Ouest.
+                                     0, // Coefficients P.
+                                     1, // Coefficients Est.
+                                     static_cast<int>(field.getMesh().getNx())}) // Coefficients Nord.
+{}
+
 
 double FVM::SparseMatrixDIA::getCoefficient(size_t i, int offset) const
 {

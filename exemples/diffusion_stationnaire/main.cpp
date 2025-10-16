@@ -19,7 +19,9 @@
 
 int main()
 {
-    // FVM::Mesh2D mesh = FVM::uniformMeshing(2,2,1,1);
+    // FVM::Mesh2D mesh = FVM::uniformMeshing(10,10,1,2);
+    // FVM::ScalarField T(mesh);
+    //mesh.save_vtk("test2");
     // FVM::SparseMatrixDIA A(9,{-1,0,1});
     // FVM::Vectorb b(9);
     // for (int i = 0; i < 9;++i)
@@ -28,12 +30,20 @@ int main()
     // }
     // // A.addCoefficient(2,0,4);
     // b.addValue(2,2);
-    // FVM::scalarField x(mesh);
+    // FVM::ScalarField x(mesh);
 
     // FVM::GaussSeidelSolver solver;
     // solver.solve(A,b,x);
 
-    
+
+    FVM::Mesh2D mesh = FVM::uniformMeshing(4,4,1,2);
+    mesh.addBoundaryPatch("bot",{0,1,2,3,4});
+    mesh.addBoundaryPatch("top",{20,21,22,23,24});
+    mesh.showBoundaryPatches();
+    FVM::ScalarField T(mesh);
+    FVM::SparseMatrixDIA A(T);
+    A.print();
+
 
 }
     
