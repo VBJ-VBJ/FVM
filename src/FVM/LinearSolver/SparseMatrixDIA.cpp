@@ -10,7 +10,7 @@
 #include <cstdlib> // Pour std::abs.
 
 /*    Autres fichiers d'en-tête     */
-#include "FVM/Core/Field.h"
+#include "FVM/Core/CellField.h"
 
 FVM::SparseMatrixDIA::SparseMatrixDIA(size_t N, std::vector<int> offsets)
 {
@@ -27,7 +27,7 @@ FVM::SparseMatrixDIA::SparseMatrixDIA(size_t N, std::vector<int> offsets)
     }
 }
 
-FVM::SparseMatrixDIA::SparseMatrixDIA(const FVM::ScalarField& field) 
+FVM::SparseMatrixDIA::SparseMatrixDIA(const FVM::ScalarCellField& field)  
 : SparseMatrixDIA(field.getSize(),{-static_cast<int>(field.getMesh().getNx()), // Coefficients Sud.
                                     -1, // Coefficients Ouest.
                                      0, // Coefficients P.
@@ -69,6 +69,26 @@ void FVM::SparseMatrixDIA::addCoefficient(size_t i, int offset, double value)
     assert(!(offset < 0 && i < -offset));
     assert(!(i > N_ || i < 0));
     data_[i][d] += value;
+}
+
+
+void FVM::SparseMatrixDIA::setCoefficient(size_t i, int offset, double value)
+{
+    auto it = offset2Index.find(offset);
+    if (it == offset2Index.end()) {
+        std::cerr << "Le decalage specifie n'existe pas dans la matrice." << std::endl;
+        return;
+    }
+
+    size_t d = it->second; // Index de la diagonale correspondante.
+    // if (i > N_ - std::abs(offset)) {
+    //     std::cerr << "L'index de la diagonale est hors des limites de la matrice." << std::endl;
+    //     return;
+    // }
+    assert(!(offset > 0 && i >= N_-offset));
+    assert(!(offset < 0 && i < -offset));
+    assert(!(i > N_ || i < 0));
+    data_[i][d] = value;
 }
 
 

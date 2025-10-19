@@ -12,10 +12,11 @@
 /*    Inclusion des bibliothèques   */
 
 /* Inclusion des fichiers d'en-tête */
-class SparseMatrixDIA;
-class Vectorb;
+
 
 namespace FVM{
+    class SparseMatrixDIA;
+    class Vectorb;
 
     class BoundaryCondition {
     public:

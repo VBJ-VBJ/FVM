@@ -9,7 +9,7 @@ set(FVM_SRC
     # /BoundaryConditions
     ${CMAKE_CURRENT_LIST_DIR}/BoundaryConditions/DirichletCondition.cpp
     # /Core
-    ${CMAKE_CURRENT_LIST_DIR}/Core/Field.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Core/CellField.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Core/Utils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Core/Mesh2D.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Core/Vertex2D.cpp
@@ -17,6 +17,8 @@ set(FVM_SRC
     ${CMAKE_CURRENT_LIST_DIR}/Equations/PoissonEquation.cpp
     # /I_O
     ${CMAKE_CURRENT_LIST_DIR}/I_O/MeshFactory.cpp
+    # /Interpolation
+    ${CMAKE_CURRENT_LIST_DIR}/Interpolation/CDSScheme.cpp
     # /LinearSolver  
 	${CMAKE_CURRENT_LIST_DIR}/LinearSolver/SparseMatrixDIA.cpp
 	${CMAKE_CURRENT_LIST_DIR}/LinearSolver/Vectorb.cpp

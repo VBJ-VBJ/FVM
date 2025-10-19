@@ -15,7 +15,7 @@
 /* Inclusion des fichiers d'en-tête */
 #include "FVM/Core/Mesh2D.h"
 #include "FVM/LinearSolver/SparseMatrixDIA.h"
-#include "FVM/Core/Field.h"
+#include "FVM/Core/PhysicalCellField.h"
 
 namespace FVM{
 

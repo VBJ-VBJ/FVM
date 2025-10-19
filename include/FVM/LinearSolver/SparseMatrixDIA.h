@@ -24,9 +24,9 @@
 namespace FVM {
 
     template <typename T>
-    class Field;
+    class CellField;
 
-    using ScalarField = Field<double>;
+    using ScalarCellField = CellField<double>;
 
     class SparseMatrixDIA {
     public:
@@ -39,7 +39,7 @@ namespace FVM {
          * @brief Constructeur à partir d'un champ scalaire.
          * @param field Champ à partir duquel on construit la matrice DIA.
         */
-        SparseMatrixDIA(const Field<double>& field);
+        SparseMatrixDIA(const ScalarCellField& field);
 
         /**
          *  @brief Constructeur avec taille et offsets.
@@ -64,6 +64,14 @@ namespace FVM {
         *  @param value Valeur à ajouter.
         */
         void addCoefficient(size_t i, int offset, double value);
+
+        /**
+        *  @brief Modifie la valeur d'un coefficient de la matrice.
+        *  @param i Index de la ligne.
+        *  @param offset Décalage de la diagonale (0 pour la diagonale principale, positif pour les diagonales supérieures, négatif pour les diagonales inférieures).
+        *  @param value Nouvelle valeur.
+        */
+        void setCoefficient(size_t i, int offset, double value);
 
         /**
          *  @brief Retourne la taille de la matrice.

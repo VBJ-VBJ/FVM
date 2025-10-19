@@ -22,6 +22,14 @@ void FVM::Vectorb::addValue(size_t i, double value) {
     data_[i] += value;
 }
 
+void FVM::Vectorb::setValue(size_t i, double value) {
+    if (i >= data_.size()) {
+        std::cerr << "Index hors des limites du vecteur." << std::endl;
+        return;
+    }
+    data_[i] = value;
+}
+
 
 double FVM::Vectorb::getCoefficient(size_t i) const
 {

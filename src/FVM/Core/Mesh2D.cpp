@@ -8,13 +8,16 @@
 
 /*    Inclusion des bibliothèques   */
 #include <fstream>
+#include <cassert>
 
 /*    Autres fichiers d'en-tête     */
+#include "FVM/Core/Utils.h"
 
 
 FVM::VertexList FVM::Mesh2D::getVertexList() const
 {
 	return vertexList_;
+	
 }
 
 
@@ -146,7 +149,51 @@ void FVM::Mesh2D::showBoundaryPatches(){
     std::cout << "------------------------------------" << std::endl;
 }
 
+
 std::map<std::string,std::vector<size_t>> FVM::Mesh2D::getBoundaryPatches() const
 {
 	return boundaryPatches_;
+}
+
+
+std::vector<size_t> FVM::Mesh2D::getBoundaryPatchesNodes(const std::string& patchName) const 
+{
+	if (boundaryPatches_.count(patchName) == 0)
+		throw std::runtime_error("Erreur, il n'existe pas de patch nommé : "+patchName);
+	else 
+		return boundaryPatches_.at(patchName);
+}
+
+size_t FVM::Mesh2D::getWestFaceId(size_t nodeId) const
+{
+	const auto [i, j] = toMatrixIndices(Nx_,Ny_,nodeId);
+	std::cout << i << " " << j << std::endl; 
+	assert(j != 0);
+	return toLinearIndex(Nx_,Ny_+1, i,j-1);
+}
+
+size_t FVM::Mesh2D::getEastFaceId(size_t nodeId) const
+{
+	const auto [i, j] = toMatrixIndices(Nx_,Ny_,nodeId);
+	std::cout << i << " " << j << std::endl; 
+	assert(j != Nx_);
+	return toLinearIndex(Nx_,Ny_+1, i,j);
+}
+
+size_t FVM::Mesh2D::getNorthFaceId(size_t nodeId) const
+{
+	const auto [i, j] = toMatrixIndices(Nx_,Ny_,nodeId);
+	std::cout << i << " " << j << std::endl; 
+	assert(i != Ny_);
+	std::cout << Nx_*(Ny_+1)+toLinearIndex(Nx_+1,Ny_, i,j) << std::endl;
+	return Nx_*(Ny_+1)+toLinearIndex(Nx_+1,Ny_, i,j);
+}
+
+size_t FVM::Mesh2D::getSouthFaceId(size_t nodeId) const
+{
+	const auto [i, j] = toMatrixIndices(Nx_,Ny_,nodeId);
+	std::cout << i << " " << j << std::endl; 
+	assert(i != 0);
+	std::cout << Nx_*(Ny_+1)+toLinearIndex(Nx_+1,Ny_, i-1,j) << std::endl;
+	return Nx_*(Ny_+1)+toLinearIndex(Nx_+1,Ny_, i-1,j);
 }

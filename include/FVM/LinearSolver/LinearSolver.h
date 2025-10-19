@@ -15,7 +15,7 @@
 /* Inclusion des fichiers d'en-tête */
 #include "FVM/LinearSolver/SparseMatrixDIA.h"
 #include "FVM/LinearSolver/Vectorb.h"
-#include "FVM/Core/Field.h"
+#include "FVM/Core/CellField.h"
 
 namespace FVM {
 
@@ -29,7 +29,7 @@ namespace FVM {
          * @param b Vecteur du système linéaire.
          * @return Vecteur solution x.
          */
-        virtual void solve(const SparseMatrixDIA& A, const Vectorb& b, ScalarField& x) = 0;
+        virtual void solve(const SparseMatrixDIA& A, const Vectorb& b, ScalarCellField& x) = 0;
     };
 
 }

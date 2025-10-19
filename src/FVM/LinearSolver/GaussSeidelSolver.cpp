@@ -13,7 +13,7 @@
 /*    Autres fichiers d'en-tête     */
 
 
-void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, ScalarField &x) 
+void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, ScalarCellField &x) 
 {
     if (b.getSize() != x.getSize())
     {
@@ -21,7 +21,7 @@ void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, S
         return ;
     }
 
-    ScalarField x_next = x;
+    ScalarCellField x_next = x;
     double sum_next,sum;
     size_t it{0};
     double res{(A*x-b).getNormL2Field()/b.getNormL2()};

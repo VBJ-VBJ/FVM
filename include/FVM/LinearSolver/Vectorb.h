@@ -39,6 +39,13 @@ namespace FVM {
         void addValue(size_t i, double value);
 
         /**
+         * @brief Modifie la valeur de l'élément i du vecteur.
+         * @param i Index de l'élément.
+         * @param value Nouvelle valeur.
+         */
+        void setValue(size_t i, double value);
+
+        /**
          * @brief Retourne la valeur du coefficient à un index donné.
          */
         double getCoefficient(size_t i) const;

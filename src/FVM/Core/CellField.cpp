@@ -1,10 +1,10 @@
 /*
- * Field.cpp
+ * CellField.cpp
  *
 */
 
 /* Inclusion du fichier d'en tête  */
-#include "FVM/Core/Field.h"
+#include "FVM/Core/CellField.h"
 
 /*    Inclusion des bibliothèques   */
 #include <cstdlib> // Pour std::abs.
@@ -14,12 +14,12 @@
 
 namespace FVM {
 
-  ScalarField operator-(const Vectorb& vec, const ScalarField& field) {
+  ScalarCellField operator-(const Vectorb& vec, const ScalarCellField& field) {
         if (vec.getSize() != field.getSize()) {
             throw std::runtime_error("Les tailles du vecteur et du champ ne correspondent pas pour la soustraction.");
         }
 
-        ScalarField result(field.getMesh());
+        ScalarCellField result(field.getMesh());
         for (size_t i = 0; i < vec.getSize(); ++i) {
             result.setField(i, vec.getCoefficient(i) - field.getField(i));
         }
@@ -27,12 +27,12 @@ namespace FVM {
     }
 
 
-    ScalarField operator-(const ScalarField& field, const Vectorb& vec) {
+    ScalarCellField operator-(const ScalarCellField& field, const Vectorb& vec) {
         if (vec.getSize() != field.getSize()) {
             throw std::runtime_error("Les tailles du vecteur et du champ ne correspondent pas pour la soustraction.");
         }
 
-        ScalarField result(field.getMesh());
+        ScalarCellField result(field.getMesh());
         for (size_t i = 0; i < vec.getSize(); ++i) {
             result.setField(i, -vec.getCoefficient(i) + field.getField(i));
         }
@@ -40,12 +40,12 @@ namespace FVM {
     }
 
 
-    ScalarField operator*(const SparseMatrixDIA& mat, const ScalarField& field) {
+    ScalarCellField operator*(const SparseMatrixDIA& mat, const ScalarCellField& field) {
         if (mat.getSize() != field.getSize()) {
             throw std::runtime_error("Les tailles de la matrice et du champ ne correspondent pas pour la multiplication.");
         }
 
-        ScalarField result(field.getMesh()) ;
+        ScalarCellField result(field.getMesh()) ;
         for (size_t i = 0; i < field.getSize(); ++i) {
             double sum = 0.0;
             for (auto& offset : mat.getOffsets()) {
@@ -60,5 +60,8 @@ namespace FVM {
         }
         return result;
     }
+
+
+    
 
 }

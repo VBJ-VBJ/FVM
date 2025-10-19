@@ -29,18 +29,6 @@ namespace FVM {
     class Field {
     public:
 
-        /**
-         * @brief Construction du champ à partir d'un mesh.
-         * @note Les conditions limites associées aux patchs définis dans le mesh sont fixées comme Dirichlet de 0 par défaut.
-         */
-        Field(const Mesh2D& mesh) : mesh_(mesh), data_((mesh.getNx()+1)*(mesh.getNy()+1)) 
-        {
-            for (const auto& it : mesh_.getBoundaryPatches())
-            {
-                BoundaryConditions_.emplace(it.first, std::make_shared<DirichletCondition>(1.0));
-            }
-        }
-
         /** 
          * @brief Ajoute un terme à un index donné du champ.
          * @param index L'index du terme en question.
@@ -122,6 +110,7 @@ namespace FVM {
             return mesh_;
         }
 
+
        T& operator[](size_t i){
             if (i < 0 || static_cast<size_t>(i) >= data_.size()){
                 throw std::out_of_range("Index de cellule hors limites.");
@@ -139,7 +128,16 @@ namespace FVM {
         return *this;
     }
 
-    private:
+    protected:
+        /**
+         * @brief Construction du champ.
+         */
+        Field(const Mesh2D& mesh,size_t fieldSize) : mesh_(mesh), data_(fieldSize) {}
+
+        /**
+         * @brief Construction du champ avec une valeur initiale.
+         */
+        Field(const Mesh2D& mesh,size_t fieldSize, T initValue) : mesh_(mesh), data_(fieldSize,initValue) {}
 
         /** @brief Stocke les données en tout points du champ. */
         std::vector<T> data_;
@@ -147,18 +145,8 @@ namespace FVM {
         /** @brief Maillage du domaine physique associé au champ. */
         const Mesh2D& mesh_;
 
-        /** @brief Condition limites associées au patch. */
-        std::map<std::string,std::shared_ptr<BoundaryCondition>> BoundaryConditions_;
-
     };
 
-    using ScalarField=Field<double>;
-
-    ScalarField operator-(const Vectorb& vec, const ScalarField& field);
-
-    ScalarField operator-(const ScalarField& field, const Vectorb& vec);
-
-    ScalarField operator*(const SparseMatrixDIA& mat, const ScalarField& field); 
 }
 
 #endif // INCLUDE_FVM_CORE_FIELD_H

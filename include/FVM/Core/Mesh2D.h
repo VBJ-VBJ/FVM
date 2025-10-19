@@ -118,7 +118,24 @@ namespace FVM {
 		 * @return Les patchs pour les CL.
 		 */
 		std::map<std::string,std::vector<size_t>> getBoundaryPatches() const;
+
+		/**
+		 * @brief Permet d'accéder au noeuds associés à un patch.
+		 * @return Une liste contenant l'ensemble des noeuds associés au patch.
+		 * @throw std::runtime_error Si le nom du patch ne figure pas dans la liste.
+		 */
+		std::vector<size_t> getBoundaryPatchesNodes(const std::string& patchName) const;
 		
+
+		size_t getWestFaceId(size_t nodeId) const;
+
+		size_t getEastFaceId(size_t nodeId) const;
+
+		size_t getNorthFaceId(size_t nodeId) const;
+
+		size_t getSouthFaceId(size_t nodeId) const;
+		
+
 	private:
 		/** @brief Nombre de mailles par lignes. */
 		size_t Nx_{ 0 };
