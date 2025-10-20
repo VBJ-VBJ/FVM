@@ -18,7 +18,7 @@ FVM::Mesh2D FVM::uniformMeshing(size_t Nx, size_t Ny,double L, double H)
 	FVM::VertexList vertexList((Nx + 1) * (Ny + 1));
 	double deltax{ L / Nx };
 	double deltay{ H / Ny };
-	unsigned int id{ 0 };
+	size_t id{ 0 };
 	for (size_t i=0; i <= Ny; ++i)
 	{
 		for (size_t ii = 0; ii <= Nx; ++ii)
@@ -35,7 +35,7 @@ FVM::Mesh2D FVM::uniformMeshing(size_t Nx, size_t Ny,double L, double H)
 FVM::Mesh2D FVM::cosMeshing(size_t Nx, size_t Ny,double L, double H)
 {
     FVM::VertexList vertexList((Nx + 1) * (Ny + 1));
-	unsigned int id{ 0 };
+	size_t id{ 0 };
 	for (size_t i = 0; i <= Ny; ++i)
 	{
 		for (size_t ii = 0; ii <= Nx; ++ii)

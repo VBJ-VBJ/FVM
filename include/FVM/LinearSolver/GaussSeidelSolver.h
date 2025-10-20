@@ -43,7 +43,7 @@ namespace FVM {
         double tol_ = 1e-6;
 
         /** @brief Maximum d'itération de l'algorithme. */
-        unsigned int maxIter_ = 100;
+        size_t maxIter_ = 100;
 
     };
 

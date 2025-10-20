@@ -39,7 +39,7 @@ namespace FVM{
             {
                 size_t nodeId = toLinearIndex(mesh_,i,j);
                 surfaceField.setField(surfaceId,0.5*(cellField.getField(nodeId)+cellField.getField(nodeId+mesh_.getNx()+1))) ; // Car les faces sont centrées entre les noeuds.
-                ++surfaceId;              
+                ++surfaceId;            
             }
         }
 

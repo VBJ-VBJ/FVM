@@ -18,8 +18,12 @@
 #include "FVM/Equations/PoissonEquation.h"
 #include "FVM/Interpolation/CDSScheme.h"
 #include "FVM/Core/SurfaceField.h"
+#include "FVM/Discretization/Schemes/GaussLaplacianScheme.h"
+#include "FVM/I_O/VtkWriter.h"
 #include <iostream>
 #include <memory>
+#include "FVM/Core/Constants.h"
+#include "FVM/Discretization/SourceTerm/FunctionSource.h"
 
 // nombre aléatoires
 #include <random>
@@ -44,14 +48,46 @@ int main()
     // FVM::GaussSeidelSolver solver;
     // solver.solve(A,b,x);
 
-
+    size_t Nx{5};
+    size_t Ny{5};
+    double L{2.0};
+    double H{2.0};
 
     // Génération du maillage.
-    FVM::Mesh2D mesh = FVM::uniformMeshing(3,3,1,2);
+    //FVM::Mesh2D mesh = FVM::uniformMeshing(Nx,Ny,L,H);
+    FVM::Mesh2D mesh = FVM::cosMeshing(Nx,Ny,L,H);
     
     // Ajout des patch.
-    mesh.addBoundaryPatch("bot",{0,1,2,3,4});
-    
+    std::vector<size_t> patchNodeListLeft,patchNodeListRight,patchNodeListUp,patchNodeListDown;
+    for (int i = 0 ; i < Ny+1 ; ++i) // gauche 
+    {
+        
+        int j = 0; 
+        patchNodeListLeft.push_back(toLinearIndex(mesh,i,j));  
+    }
+
+    for (int i = 0 ; i < Ny+1 ; ++i) // droite
+    {
+        int j = Nx; 
+        patchNodeListRight.push_back(toLinearIndex(mesh,i,j));  
+    }
+
+    for (int j = 1 ; j < Nx ; ++j) // haut
+    {
+        int i = Nx; 
+        patchNodeListUp.push_back(toLinearIndex(mesh,i,j));  
+    }
+
+    for (int j = 1 ; j < Nx ; ++j) // bas
+    {
+        int i = 0; 
+        patchNodeListDown.push_back(toLinearIndex(mesh,i,j));  
+    }
+
+    mesh.addBoundaryPatch("Left",patchNodeListLeft);
+    mesh.addBoundaryPatch("Right",patchNodeListRight);
+    mesh.addBoundaryPatch("Up",patchNodeListUp);
+    mesh.addBoundaryPatch("Down",patchNodeListDown);
 
     // Affichage des patchs.
     mesh.showBoundaryPatches();
@@ -63,23 +99,29 @@ int main()
     FVM::Vectorb b(T.getSize());
     FVM::SparseMatrixDIA A(T);
 
-    // Création du therme source (vide ici).
-    FVM::ScalarCellField Source(mesh);
+    // Création du therme source.
+    FVM::FunctionSource([L](double x, double y) {
+            return -2*(2*FVM::pi/L)*(2*FVM::pi/L)*std::cos(2*FVM::pi/L*x)*std::sin(2*FVM::pi/L*y);
+        }).apply(A,b,T);
+    
 
     // Ajout d'une CL.
-    T.setBoundaryCondition("bot",std::make_shared<FVM::DirichletCondition>(5.0));
+    T.setBoundaryCondition("Right",std::make_shared<FVM::DirichletCondition>(0.1));
+    T.setBoundaryCondition("Left",std::make_shared<FVM::DirichletCondition>(0.1));
+    T.setBoundaryCondition("Up",std::make_shared<FVM::DirichletCondition>(0.1));
+    T.setBoundaryCondition("Down",std::make_shared<FVM::DirichletCondition>(0.1));
 
+
+    FVM::ScalarCellField test(mesh);
+    FVM::PoissonEquation(T,test).assemble(A,b,T);
     
     // Affichage de A
-    A.print();
+    //A.print();
     std::cout << "====" << std::endl; 
 
     // Construction de l'équation de Poisson.
-    FVM::PoissonEquation eq(T,Source);
-    eq.assemble(A,b,T);
-
     // Affichage de A et b après construction.
-    A.print();
+    //A.print();
     b.print();
 
     std::cout << "====" << std::endl; 
@@ -100,5 +142,15 @@ int main()
 
     // FVM::ScalarSurfaceField surfaceField = FVM::CDSScheme(mesh).interpolate(cellField);
     // surfaceField.print();
+    FVM::GaussLaplacianScheme(-1.0,mesh).apply(A,b,T);
+    //A.print();
+    FVM::GaussSeidelSolver().solve(A,b,T);
+    std::cout << "====" << std::endl; 
+    //T.print();
+
+    FVM::VtkWriter vtkWriter(std::make_shared<FVM::Mesh2D>(mesh));
+    vtkWriter.addScalarField("Temp",std::make_shared<FVM::ScalarPhysicalCellField>(T));
+    
+    vtkWriter.write("testtt");
 }
     

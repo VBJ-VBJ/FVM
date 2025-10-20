@@ -128,6 +128,11 @@ namespace FVM {
         return *this;
     }
 
+    Vertex2D getFieldNode(size_t fieldId) const
+    {
+        return mesh_.getNode(fieldId);
+    }
+
     protected:
         /**
          * @brief Construction du champ.

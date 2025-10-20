@@ -10,16 +10,25 @@
 #define INCLUDE_FVM_DISCRETISATION_SCHEMES_GAUSSLAPLACIANSCHEME_H 
 
 /*    Inclusion des bibliothèques   */
+#include <memory>
 
 
 /* Inclusion des fichiers d'en-tête */
-#include "DiscretizationScheme.h"
+#include "FVM/Discretization/Schemes/DiscretizationScheme.h"
+#include "FVM/Core/CellField.h"
+#include "FVM/LinearSolver/SparseMatrixDIA.h"
+#include "FVM/LinearSolver/Vectorb.h"
+#include "FVM/Core/SurfaceField.h"
+#include "FVM/Interpolation/CDSScheme.h"
 
 namespace FVM{
 
     class Mesh2D; 
+    class InterpolationScheme;
 
-    class GaussLaplacianScheme {
+
+
+    class GaussLaplacianScheme : public DiscretizationScheme {
     public:
 
         /**
@@ -42,7 +51,7 @@ namespace FVM{
     private:
         const Mesh2D& mesh_;
         std::shared_ptr<InterpolationScheme> gammaInterpolator_ ;
-        const ScalarCellField gamma_ ;
+        ScalarCellField gamma_ ;
     };
 
 }

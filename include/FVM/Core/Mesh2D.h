@@ -126,6 +126,7 @@ namespace FVM {
 		 */
 		std::vector<size_t> getBoundaryPatchesNodes(const std::string& patchName) const;
 		
+		Vertex2D getNode(size_t nodeId) const; 
 
 		size_t getWestFaceId(size_t nodeId) const;
 
