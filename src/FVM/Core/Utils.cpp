@@ -42,3 +42,70 @@ std::pair<size_t, size_t> FVM::toMatrixIndices(size_t Nx, size_t Ny, size_t k)
     }
     return {i, j};
 }
+
+
+std::vector<size_t> FVM::getTopNodes(const Mesh2D& mesh)
+{
+    std::vector<size_t> nodeList(mesh.getNx()+1);
+    for (int j = 0 ; j < mesh.getNx()+1 ; ++j)
+    {
+        int i = mesh.getNy(); 
+        nodeList[j] = toLinearIndex(mesh,i,j); 
+    }
+    return nodeList;
+}
+
+
+std::vector<size_t> FVM::getBotNodes(const Mesh2D& mesh)
+{
+    std::vector<size_t> nodeList(mesh.getNx()+1);
+    for (int j = 0 ; j < mesh.getNx()+1 ; ++j)
+    {
+        int i = 0; 
+        nodeList[j] = toLinearIndex(mesh,i,j); 
+    }
+    return nodeList;
+}
+
+std::vector<size_t> FVM::getLeftNodes(const Mesh2D& mesh)
+{
+    std::vector<size_t> nodeList(mesh.getNx()+1);
+    for (int i = 0 ; i < mesh.getNy()+1 ; ++i)
+    {
+        int j = 0; 
+        nodeList[i] = toLinearIndex(mesh,i,j); 
+    }
+    return nodeList;
+}
+
+std::vector<size_t> FVM::getRightNodes(const Mesh2D& mesh)
+{
+    std::vector<size_t> nodeList(mesh.getNx()+1);
+    for (int i = 0 ; i < mesh.getNy()+1 ; ++i)
+    {
+        int j = mesh.getNx(); 
+        nodeList[i] = toLinearIndex(mesh,i,j); 
+    }
+    return nodeList;
+}
+
+
+std::vector<size_t> FVM::getBoundaryNodes(const Mesh2D& mesh)
+{
+    const auto& topNodes  = getTopNodes(mesh);
+    const auto& botNodes  = getBotNodes(mesh);
+    const auto& leftNodes = getLeftNodes(mesh);
+    const auto& rightNodes= getRightNodes(mesh);
+
+    size_t total_size = topNodes.size() + botNodes.size() + leftNodes.size() + rightNodes.size();
+    
+    std::vector<size_t> boundaryNodes; 
+    boundaryNodes.reserve(total_size); 
+
+    boundaryNodes.insert(boundaryNodes.end(), topNodes.begin(), topNodes.end());
+    boundaryNodes.insert(boundaryNodes.end(), botNodes.begin(), botNodes.end());
+    boundaryNodes.insert(boundaryNodes.end(), leftNodes.begin(), leftNodes.end());
+    boundaryNodes.insert(boundaryNodes.end(), rightNodes.begin(), rightNodes.end());
+    
+    return boundaryNodes;
+}

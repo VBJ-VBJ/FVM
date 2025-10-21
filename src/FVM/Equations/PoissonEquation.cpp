@@ -20,8 +20,7 @@ void FVM::PoissonEquation::assemble(SparseMatrixDIA& A, Vectorb& b, const Scalar
     {
         for (const auto& index : phi.getMesh().getBoundaryPatchesNodes(pair.first) )
         {
-            std::cout << index<< std::endl ;
-            pair.second->apply(A,b,index);
+            pair.second->apply(A,b,index,phi);
         }
     }
 

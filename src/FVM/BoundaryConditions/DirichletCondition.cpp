@@ -14,7 +14,7 @@
 #include "FVM/LinearSolver/Vectorb.h"
 
 
-void FVM::DirichletCondition::apply(SparseMatrixDIA& A, Vectorb& b, size_t index) const{
+void FVM::DirichletCondition::apply(SparseMatrixDIA& A, Vectorb& b, size_t index, const ScalarCellField& phi) const{
 
     A.setCoefficient(index,0,1);
     b.setValue(index,value_);

@@ -20,7 +20,6 @@ void FVM::FunctionSource::apply(SparseMatrixDIA& A,Vectorb& b,const ScalarCellFi
     {
         b.addValue(index,functionSource_(field.getFieldNode(index).getX(),field.getFieldNode(index).getY())
             *field.getMesh().getDeltax(index)*field.getMesh().getDeltay(index));
-        std::cout << field.getMesh().getDeltax(index) << "t" ;
     }
 }
     

@@ -12,18 +12,19 @@
 /*    Inclusion des bibliothèques   */
 
 /* Inclusion des fichiers d'en-tête */
+#include "FVM/LinearSolver/SparseMatrixDIA.h"
+#include "FVM/LinearSolver/Vectorb.h"
 
 
 namespace FVM{
-    class SparseMatrixDIA;
-    class Vectorb;
+
 
     class BoundaryCondition {
     public:
 
         virtual ~BoundaryCondition() = default;
 
-        virtual void apply(SparseMatrixDIA& A, Vectorb& b, size_t index) const = 0;
+        virtual void apply(SparseMatrixDIA& A, Vectorb& b, size_t index,const ScalarCellField& phi) const = 0;
     };
 
 }

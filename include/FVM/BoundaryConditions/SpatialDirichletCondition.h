@@ -1,27 +1,30 @@
 /*
- * DirichletCondition.h
+ * SpatialDirichletCondition.h
  *
- *     Créé le : 14 octobre 2025
+ *     Créé le : 21 octobre 2025
  *      Auteur : VBJ
- * Description : Représente les conditions de Dirichlet.
+ * Description : Représente les conditions de Dirichlet avec une fonction dépendant de l'espace.
 */
 
-#ifndef INCLUDE_FVM_BOUNDARYCONDITION_DIRICHLETCONDITION_H
-#define INCLUDE_FVM_BOUNDARYCONDITION_DIRICHLETCONDITION_H
+#ifndef INCLUDE_FVM_BOUNDARYCONDITION_SPATIALDIRICHLETCONDITION_H
+#define INCLUDE_FVM_BOUNDARYCONDITION_SPATIALDIRICHLETCONDITION_H
 
 /*    Inclusion des bibliothèques   */
 #include <cstddef>
+#include <functional>
 
 /* Inclusion des fichiers d'en-tête */
 #include "FVM/BoundaryConditions/BoundaryCondition.h"
 
 namespace FVM{
 
-    class DirichletCondition : public BoundaryCondition {
+    using SpatialFunction = std::function<double(double,double)>;
+
+    class SpatialDirichletCondition : public BoundaryCondition {
     public:
 
         /** @brief Initialise la valeur de la condition limite. */
-        DirichletCondition(double value) : value_(value) {};
+        SpatialDirichletCondition(SpatialFunction spatialFunction) : spatialFunction_(spatialFunction) {};
 
         /** 
          * @brief Applique la condition limite au point donné. 
@@ -32,10 +35,10 @@ namespace FVM{
         virtual void apply(SparseMatrixDIA& A, Vectorb& b, size_t index,const ScalarCellField& phi) const override;
 
     private: 
-        double value_ ; 
+        SpatialFunction spatialFunction_; 
 
 };
 
 }
 
-#endif // INCLUDE_FVM_BOUNDARYCONDITION_DIRICHLETCONDITION_H
+#endif // INCLUDE_FVM_BOUNDARYCONDITION_SPATIALDIRICHLETCONDITION_H

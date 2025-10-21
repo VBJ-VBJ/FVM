@@ -11,6 +11,7 @@
 
 /*    Inclusion des bibliothèques   */
 #include <stdexcept>
+#include <vector>
 
 /* Inclusion des fichiers d'en-tête */
 #include "Mesh2D.h"
@@ -26,7 +27,7 @@ namespace FVM{
      * @return k Indice linéaire.
      * @throw std::out_of_range Si i ou j hors limite.
      */
-    size_t toLinearIndex(const FVM::Mesh2D& mesh, size_t i, size_t j);
+    size_t toLinearIndex(const Mesh2D& mesh, size_t i, size_t j);
 
 
     /** 
@@ -46,13 +47,24 @@ namespace FVM{
     * @brief Convertit un indice linéaire k en indices (i, j) de matrice 2D.
     * * L'indexation linéaire originale est : k = i * (Nx + 1) + j.
     * La taille totale de la grille est implicitement (Ny + 1) x (Nx + 1).
-    * * @param Nx La dimension horizontale maximale (indice de colonne maximal).
+    * @param Nx La dimension horizontale maximale (indice de colonne maximal).
     * @param Ny La dimension verticale maximale (indice de ligne maximal).
     * @param k L'indice linéaire à convertir (doit être dans la plage [0, (Ny+1)(Nx+1) - 1]).
     * @return std::pair<size_t, size_t> Une paire où le premier élément est l'indice de ligne (i) et le second est l'indice de colonne (j).
     * @throws std::out_of_range si l'indice linéaire k est hors des limites de la matrice.
     */
     std::pair<size_t, size_t> toMatrixIndices(size_t Nx, size_t Ny, size_t k);
+
+    
+    std::vector<size_t> getTopNodes(const Mesh2D& mesh);
+
+    std::vector<size_t> getBotNodes(const Mesh2D& mesh);
+
+    std::vector<size_t> getLeftNodes(const Mesh2D& mesh);
+
+    std::vector<size_t> getRightNodes(const Mesh2D& mesh);
+
+    std::vector<size_t> getBoundaryNodes(const Mesh2D& mesh);
 
 }
 
