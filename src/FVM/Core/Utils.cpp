@@ -8,6 +8,8 @@
 
 /*    Inclusion des bibliothèques   */
 #include <cassert>
+#include <memory>
+#include "FVM/BoundaryConditions/SpatialDirichletCondition.h"
 
 /*    Autres fichiers d'en-tête     */
 
@@ -69,7 +71,7 @@ std::vector<size_t> FVM::getBotNodes(const Mesh2D& mesh)
 
 std::vector<size_t> FVM::getLeftNodes(const Mesh2D& mesh)
 {
-    std::vector<size_t> nodeList(mesh.getNx()+1);
+    std::vector<size_t> nodeList(mesh.getNy()+1);
     for (int i = 0 ; i < mesh.getNy()+1 ; ++i)
     {
         int j = 0; 
@@ -80,9 +82,10 @@ std::vector<size_t> FVM::getLeftNodes(const Mesh2D& mesh)
 
 std::vector<size_t> FVM::getRightNodes(const Mesh2D& mesh)
 {
-    std::vector<size_t> nodeList(mesh.getNx()+1);
+    std::vector<size_t> nodeList(mesh.getNy()+1);
     for (int i = 0 ; i < mesh.getNy()+1 ; ++i)
     {
+        
         int j = mesh.getNx(); 
         nodeList[i] = toLinearIndex(mesh,i,j); 
     }
@@ -108,4 +111,31 @@ std::vector<size_t> FVM::getBoundaryNodes(const Mesh2D& mesh)
     boundaryNodes.insert(boundaryNodes.end(), rightNodes.begin(), rightNodes.end());
     
     return boundaryNodes;
+}
+
+void FVM::applyBoundaryConditions(SparseMatrixDIA& A, Vectorb& b, const ScalarPhysicalCellField& phi)
+{
+    for (const auto& pair : phi.getBoundaryConditions())
+    {
+        if (dynamic_cast<DirichletCondition*>(pair.second.get()) == nullptr || dynamic_cast<SpatialDirichletCondition*>(pair.second.get()) == nullptr)  
+        {
+            std::cout << "Appli (Passe 1 - non-Dirichlet) Patch " << pair.first << std::endl;
+            for (const auto& index : phi.getMesh().getBoundaryPatchesNodes(pair.first) )
+            {       
+                pair.second->apply(A,b,index,phi);
+            }
+        }
+    }
+    
+    for (const auto& pair : phi.getBoundaryConditions())
+    {
+        if (dynamic_cast<DirichletCondition*>(pair.second.get()) != nullptr || dynamic_cast<SpatialDirichletCondition*>(pair.second.get()) != nullptr)
+        {
+            std::cout << "Appli (Passe 2 - Dirichlet) Patch " << pair.first << std::endl;
+            for (const auto& index : phi.getMesh().getBoundaryPatchesNodes(pair.first) )
+            {            
+                pair.second->apply(A,b,index,phi);
+            }
+        }
+    }
 }

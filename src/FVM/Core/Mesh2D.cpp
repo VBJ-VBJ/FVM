@@ -73,13 +73,19 @@ double FVM::Mesh2D::getdeltay_s(size_t const& index) const
 
 double FVM::Mesh2D::getDeltax(size_t const& index) const
 {
-	return (getdeltax_w(index) + getdeltax_e(index)) / 2;
+	if (this->getNx()==0) // Cas 1D.
+		return 1.0 ;
+	else 
+		return (getdeltax_w(index) + getdeltax_e(index)) / 2;
 }
 
 
 double FVM::Mesh2D::getDeltay(size_t const& index) const
 {
-	return (getdeltay_n(index) + getdeltay_s(index)) / 2;
+	if (this->getNy()==0) // Cas 1D.
+		return 1.0;
+	else 
+		return (getdeltay_n(index) + getdeltay_s(index)) / 2;
 }
 
 

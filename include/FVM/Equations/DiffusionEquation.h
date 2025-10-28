@@ -1,5 +1,5 @@
 /*
- * PoissonEquation.h
+ * DiffusionEquation.h
  *
  *     Créé le : 14 octobre 2025
  *      Auteur : VBJ
@@ -20,7 +20,7 @@
 
 namespace FVM{
 
-    class PoissonEquation : Equation<ScalarPhysicalCellField> {
+    class DiffusionEquation : Equation<ScalarPhysicalCellField> {
     public:
 
         /**
@@ -28,7 +28,7 @@ namespace FVM{
          * @param phi Le champ scalaire à résoudre.
          * @param source Le champ source.
          */
-        PoissonEquation(const ScalarPhysicalCellField& phi, const ScalarCellField& source) : phi_(phi), source_(source) {};
+        DiffusionEquation(const ScalarPhysicalCellField& phi, const ScalarCellField& source) : phi_(phi), source_(source) {};
 
         /**
          * @brief Construit les matrices A et b du sytème linéaire.
@@ -49,7 +49,8 @@ namespace FVM{
         const ScalarPhysicalCellField& phi_; 
         
         /** @brief Terme source de l'équation. */
-        const ScalarCellField& source_;         
+        const ScalarCellField& source_;   
+        
     };
 
 }

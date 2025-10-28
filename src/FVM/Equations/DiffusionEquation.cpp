@@ -1,10 +1,10 @@
 /*
- * PoissonEquation.cpp
+ * DiffusionEquation.cpp
  *
 */
 
 /* Inclusion du fichier d'en tête  */
-#include "FVM/Equations/PoissonEquation.h"
+#include "FVM/Equations/DiffusionEquation.h"
 
 /*    Inclusion des bibliothèques   */
 
@@ -12,7 +12,7 @@
 #include "FVM/BoundaryConditions/DirichletCondition.h"
 
 
-void FVM::PoissonEquation::assemble(SparseMatrixDIA& A, Vectorb& b, const ScalarPhysicalCellField& phi)
+void FVM::DiffusionEquation::assemble(SparseMatrixDIA& A, Vectorb& b, const ScalarPhysicalCellField& phi)
 {
     
     // Application des conditions limites
@@ -26,7 +26,7 @@ void FVM::PoissonEquation::assemble(SparseMatrixDIA& A, Vectorb& b, const Scalar
 
 }
 
-void FVM::PoissonEquation::solve()
+void FVM::DiffusionEquation::solve()
 {
 
 

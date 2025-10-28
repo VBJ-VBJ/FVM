@@ -1,5 +1,5 @@
 /*
- * SparseMatrixDIA.cpp
+ * GaussSeidelSolver.cpp
  *
 */
 
@@ -39,11 +39,17 @@ void FVM::GaussSeidelSolver::solve(const SparseMatrixDIA &A, const Vectorb &b, S
                 if (offset < 0 && i >= static_cast<size_t>(-offset))
                     sum_next += A.getCoefficient(i,offset)*x_next.getField(static_cast<size_t>(i+offset));
             }
-            x_next.setField(i,1/A.getCoefficient(i,0)*( b.getCoefficient(i)-sum_next - sum));
+            //x_next.setField(i,1/A.getCoefficient(i,0)*( b.getCoefficient(i)-sum_next - sum));
+            
+            double x_gs = 1/A.getCoefficient(i,0)*( b.getCoefficient(i) - sum_next - sum );
+            
+            double x_old = x.getField(i);
+
+            x_next.setField(i, (1.0 - omega_) * x_old + omega_ * x_gs);
         }
         x = x_next;
         res = (A*x-b).getNormL2Field()/b.getNormL2();
-        std::cout << "res = " << res << "| Nombre d'iterations = " << it << std::endl;
+        std::cout << "res = " << res << "| Nombre d'iterations = " << it+1 << std::endl;
         it++; 
     }   
 }

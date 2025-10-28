@@ -28,11 +28,11 @@ FVM::SparseMatrixDIA::SparseMatrixDIA(size_t N, std::vector<int> offsets)
 }
 
 FVM::SparseMatrixDIA::SparseMatrixDIA(const FVM::ScalarCellField& field)  
-: SparseMatrixDIA(field.getSize(),{-static_cast<int>(field.getMesh().getNx()), // Coefficients Sud.
+: SparseMatrixDIA(field.getSize(),{-static_cast<int>(field.getMesh().getNx()+1), // Coefficients Sud.
                                     -1, // Coefficients Ouest.
                                      0, // Coefficients P.
                                      1, // Coefficients Est.
-                                     static_cast<int>(field.getMesh().getNx())}) // Coefficients Nord.
+                                     static_cast<int>(field.getMesh().getNx()+1)}) // Coefficients Nord.
 {}
 
 

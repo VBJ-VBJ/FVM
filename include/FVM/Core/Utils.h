@@ -15,6 +15,9 @@
 
 /* Inclusion des fichiers d'en-tête */
 #include "Mesh2D.h"
+#include "FVM/LinearSolver/SparseMatrixDIA.h"
+#include "FVM/LinearSolver/Vectorb.h"
+#include "PhysicalCellField.h"
 
 namespace FVM{
 
@@ -65,6 +68,9 @@ namespace FVM{
     std::vector<size_t> getRightNodes(const Mesh2D& mesh);
 
     std::vector<size_t> getBoundaryNodes(const Mesh2D& mesh);
+
+    void applyBoundaryConditions(SparseMatrixDIA& A, Vectorb& b, const ScalarPhysicalCellField& phi);
+
 
 }
 

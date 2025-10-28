@@ -27,6 +27,12 @@ namespace FVM {
     class GaussSeidelSolver : public LinearSolver {
     public:
 
+        GaussSeidelSolver(size_t maxIter) : maxIter_(maxIter){}
+
+        GaussSeidelSolver(size_t maxIter, double tol) : maxIter_(maxIter), tol_(tol) {}
+
+        GaussSeidelSolver(size_t maxIter, double tol, double omega) : maxIter_(maxIter), tol_(tol), omega_(omega) {}
+
         /** 
          * @brief Résout le système linéaire avec la méthode de Gauss-Seidel.
          * @param A Matrice A.
@@ -37,6 +43,9 @@ namespace FVM {
         virtual void solve(const SparseMatrixDIA& A, const Vectorb& b, ScalarCellField& x) override ;
         
         void setTolerance(double tol) { tol_ = tol; }
+
+        void setRelaxation(double omega) { omega_ = omega; }
+
         void setMaxIterations(int maxIter) { maxIter_ = maxIter; }
     private:
         /** @brief Critère de tolérance. */
@@ -44,6 +53,9 @@ namespace FVM {
 
         /** @brief Maximum d'itération de l'algorithme. */
         size_t maxIter_ = 100;
+
+        /** @brief Coefficient de relaxation de l'algorithme. */
+        double omega_ = 1.8;
 
     };
 

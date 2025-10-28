@@ -16,8 +16,8 @@
 FVM::Mesh2D FVM::uniformMeshing(size_t Nx, size_t Ny,double L, double H)
 {
 	FVM::VertexList vertexList((Nx + 1) * (Ny + 1));
-	double deltax{ L / Nx };
-	double deltay{ H / Ny };
+	double deltax = (Nx != 0) ? (L /Nx) : 1.0;
+	double deltay = (Ny != 0) ? (H /Ny) : 1.0;
 	size_t id{ 0 };
 	for (size_t i=0; i <= Ny; ++i)
 	{

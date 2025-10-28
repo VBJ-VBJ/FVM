@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Example executable (the FVM library is expected to be provided by the top-level project)
-add_executable(diffusion_stationnaire main.cpp)
+add_executable(diffusion_stationnaire_1D main.cpp)
 
-target_link_libraries(diffusion_stationnaire PRIVATE FVM)
+target_link_libraries(diffusion_stationnaire_1D PRIVATE FVM)
 
-target_include_directories(diffusion_stationnaire PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(diffusion_stationnaire_1D PRIVATE ${CMAKE_SOURCE_DIR}/include)
