@@ -1,4 +1,4 @@
-# ⚛️ Code de Calcul par Volumes Finis (FVM) pour Maillages Quadratiques Ordonnés
+# Code de Calcul par Volumes Finis (FVM) pour Maillages Quadratiques Ordonnés
 
 ## 📝 Introduction
 
@@ -34,12 +34,12 @@ Assurez-vous d'avoir installé :
     cmake -S . -B build
     ```
 
-3.  **Compilation** :
+3.  **Compilation d'un exemple** :
 
-    Rendez-vous dans le dossier `build` et compilez.
+    Rendez-vous dans le dossier `build/examples/[nom_de_l_exemple]` et compilez.
 
     ```bash
-    cd build
+    cd build/examples/[nom_de_l_exemple]
     make
     ```
 
@@ -48,7 +48,7 @@ Assurez-vous d'avoir installé :
     Les exécutables se trouvent dans le sous-dossier `build/examples/[nom_de_l_exemple]`. Par exemple, pour lancer l'exemple de Poisson :
 
     ```bash
-    ./examples/poisson/poisson
+    ./build/exemples/diffusion_stationnaire_2D/diffusion_stationnaire_2D
     ```
 
 ---
@@ -61,14 +61,13 @@ Cette version contient tous les éléments nécessaires pour résoudre un probl�
     * Générateur de **maillage quadratique ordonné** uniforme et non-uniforme.
 * **Discrétisation et Équations** :
     * Discrétisation du **Laplacien** : $\vec{\nabla} \cdot (\Gamma \vec{\nabla} \phi)$.
-    * Schéma d'Interpolation **CDS** (Central Difference Scheme).
 * **Conditions aux Limites** :
-    * Gestion des **Conditions de Neumann** (flux) et **Conditions de Dirichlet** (valeur imposée).
+    * Gestion des **Conditions de Neumann** et **Conditions de Dirichlet**.
 * **Solveur Linéaire** :
     * **Matrice Creuse** de type **DIA** (Diagonal Storage - stockage des diagonales non nulles uniquement).
     * Solveur itératif basé sur la méthode de **Gauss-Seidel**.
 * **Post-Traitement** :
-    * Possibilité d'exporter les résultats au format standard **`.vtk`** pour la visualisation (e.g., avec Paraview).
+    * Possibilité d'exporter les résultats au format standard **`.vtk`** pour la visualisation.
 
 ---
 
@@ -87,17 +86,17 @@ Le développement futur se concentrera sur les points suivants :
 
 Pour générer une documentation complète du code source (classes, fonctions) à l'aide de **Doxygen** :
 
-1.  Assurez-vous que Doxygen est installé sur votre système.
-2.  Exécutez la commande suivante depuis le dossier principal du projet (`FVM`) :
+1.  Assurez-vous que Doxygen ainsi que Graphviz sont bien installés sur votre système.
+2.  Après avoir configurer le projet (voir plus haut), exécutez la commande suivante depuis le dossier build (`FVM/build`) :
 
     ```bash
-    doxygen Doxyfile
+    make doc
     ```
     Les fichiers de documentation seront générés dans le dossier `doc/html/`.
 
 ---
 
-## 💡 Exemples de Résolution
+## 💡 Exemples
 
 ### 1. Équation de Poisson (Diffusion pure avec terme source)
 
@@ -111,12 +110,5 @@ $$
 
 <img width="772" height="477" alt="Solution numérique de l'équation de Poisson" src="https://github.com/user-attachments/assets/778e2147-fa71-4951-bce9-fe065a736129" />
 
-### 2. Diffusion Pure (Laplacien Nul)
-
-Résolution de l'équation de diffusion $\Delta T = 0$ avec différentes configurations de conditions aux limites :
-
-* **Cas 1 : Point chaud central** : Condition de Dirichlet $T=0$ sur tous les bords.
-* **Cas 2 : Gradient imposé** : Dirichlet $T=1$ sur le bord gauche, $T=0$ sur les autres bords.
-* **Cas 3 : Isolation** : Dirichlet $T=1$ sur le bord gauche, **flux nul** (Neumann $\frac{\partial T}{\partial n} = 0$) sur les autres côtés.
 
 
