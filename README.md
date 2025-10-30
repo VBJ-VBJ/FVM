@@ -98,6 +98,8 @@ Pour générer une documentation complète du code source (classes, fonctions) �
 
 ## 💡 Exemples
 
+Le résultat des calculs est représenté via ParaView.
+
 ### 1. Équation de Poisson (Diffusion pure avec terme source)
 
 Résolution de l'équation de Poisson avec terme source $S$ :
