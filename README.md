@@ -112,5 +112,18 @@ $$
 
 <img width="772" height="477" alt="Solution numérique de l'équation de Poisson" src="https://github.com/user-attachments/assets/778e2147-fa71-4951-bce9-fe065a736129" />
 
+### 2. Point chaud (Diffusion pure instationnaire)
+
+Résolution de l'équation de la chaleur instationnaire.
+
+$$
+\frac{\partial T}{\partial t} + \Delta T = 0
+$$
+
+La capacité thermique du milieu ainsi que sa conductivité thermique sont égales à 1 pour l'exemple.
+
+![ezgif com-animated-gif-maker](https://github.com/user-attachments/assets/9fafe717-09fe-4b76-b640-4e8704901219)
+
+
 
 
