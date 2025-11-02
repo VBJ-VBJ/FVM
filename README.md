@@ -121,7 +121,7 @@ $$
 \frac{\partial T}{\partial t} + \Delta T = 0
 $$
 
-**Description** : La capacité thermique du milieu ainsi que sa conductivité thermique sont égales à 1 pour l'exemple (équation d'Helmotz). Le champ de température initial vaut 0 partout et 1 au centre. On impose des conditions de Dirichlet T = 0 sur les bords.
+**Description** : La capacité thermique du milieu ainsi que sa conductivité thermique sont égales à 1 pour l'exemple (équation d'Helmotz). Le champ de température initial vaut 0 partout et 1 au centre. On impose des conditions de Dirichlet T = 0 sur les bords. Ci-dessous une vue du profil de température dans les diagonales du domaine carré (1x1).
 
 ![ezgif com-animated-gif-maker](https://github.com/user-attachments/assets/9fafe717-09fe-4b76-b640-4e8704901219)
 
