@@ -66,6 +66,8 @@ Cette version contient tous les éléments nécessaires pour résoudre un probl�
 * **Solveur Linéaire** :
     * **Matrice Creuse** de type **DIA** (Diagonal Storage - stockage des diagonales non nulles uniquement).
     * Solveur itératif basé sur la méthode de **Gauss-Seidel**.
+* **Résolution Instationnaire** : Implémentation de schémas temporels pour la résolution transitoire :
+    * Euler implicite.
 * **Post-Traitement** :
     * Possibilité d'exporter les résultats au format standard **`.vtk`** pour la visualisation.
 
@@ -77,7 +79,6 @@ Le développement futur se concentrera sur les points suivants :
 
 * **Équation de Transport** : Ajout de la discrétisation du terme de convection $\vec{\nabla} \cdot (\rho \vec{v} \phi)$.
 * **Résolution Instationnaire** : Implémentation de schémas temporels pour la résolution transitoire :
-    * Euler Explicite/Implicite
     * Crank-Nicolson
 
 ---
@@ -120,7 +121,7 @@ $$
 \frac{\partial T}{\partial t} + \Delta T = 0
 $$
 
-La capacité thermique du milieu ainsi que sa conductivité thermique sont égales à 1 pour l'exemple.
+**Description** : La capacité thermique du milieu ainsi que sa conductivité thermique sont égales à 1 pour l'exemple (équation d'Helmotz). Le champ de température initial vaut 0 partout et 1 au centre. On impose des conditions de Dirichlet T = 0 sur les bords.
 
 ![ezgif com-animated-gif-maker](https://github.com/user-attachments/assets/9fafe717-09fe-4b76-b640-4e8704901219)
 
