@@ -8,6 +8,7 @@
 
 /*    Inclusion des bibliothèques   */
 #include <cstdlib> // Pour std::abs.
+#include <algorithm> // Pour std::fill.
 
 /*    Autres fichiers d'en-tête     */
 #include "FVM/Core/CellField.h"
@@ -110,4 +111,12 @@ size_t FVM::SparseMatrixDIA::getSize() const {
 
 std::vector<int> FVM::SparseMatrixDIA::getOffsets() const {
     return offsets_;
+}
+
+
+void FVM::SparseMatrixDIA::setAllZero() 
+{
+    for (auto& column : data_) {
+        std::fill(column.begin(), column.end(), 0.0);
+    }
 }

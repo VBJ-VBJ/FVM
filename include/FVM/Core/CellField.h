@@ -40,10 +40,20 @@ namespace FVM {
 
     using ScalarCellField = CellField<double>;
 
-        // Opérateur sur les champs scalaires.
+    // Opérateur sur les champs scalaires.
     ScalarCellField operator-(const Vectorb& vec, const ScalarCellField& field);
 
     ScalarCellField operator-(const ScalarCellField& field, const Vectorb& vec);
+
+    ScalarCellField operator-(const ScalarCellField& field1, const ScalarCellField& field2);
+
+    ScalarCellField operator+(const ScalarCellField& field1, const ScalarCellField& field2);
+
+    ScalarCellField operator/(const ScalarCellField& field1, const ScalarCellField& field2);
+
+    ScalarCellField operator*(const ScalarCellField& field1, const ScalarCellField& field2);
+
+    ScalarCellField operator*(double number, const ScalarCellField& field);
 
     ScalarCellField operator*(const SparseMatrixDIA& mat, const ScalarCellField& field); 
 

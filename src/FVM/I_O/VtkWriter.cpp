@@ -17,7 +17,7 @@
 
 namespace FVM{
 
-    void VtkWriter::addScalarField(const std::string& fieldName , std::shared_ptr<const ScalarCellField> field) {
+    void VtkWriter::addScalarField(std::string fieldName , std::shared_ptr<const ScalarCellField> field) {
                 ScalarfieldList_[fieldName] = field; 
             }
 

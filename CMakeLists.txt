@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(src/FVM)
 add_subdirectory(exemples/diffusion_stationnaire_1D)
 add_subdirectory(exemples/diffusion_stationnaire_2D)
+add_subdirectory(exemples/diffusion_instationnaire_2D)
 
 # Documentation (Doxygen)
 find_package(Doxygen QUIET)

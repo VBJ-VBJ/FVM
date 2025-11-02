@@ -36,7 +36,7 @@ namespace FVM{
         * @param field Le pointeur partagé vers les données.
         * @param fieldName Le nom du champ tel qu'il doit apparaître dans le fichier VTK.
         */
-        void addScalarField(const std::string& fieldName , std::shared_ptr<const ScalarCellField> field);
+        void addScalarField(std::string fieldName , std::shared_ptr<const ScalarCellField> field);
 
         bool write(std::string const& name, std::string const& path = "") const; 
 

@@ -90,6 +90,11 @@ namespace FVM {
         */
         std::vector<int> getOffsets() const;
 
+        /**
+         * @brief Remet tous les vecteurs à 0.
+        */
+        void setAllZero();
+
     private:
         /** @brief Dimension de la matrice (N x N). */
         size_t N_;

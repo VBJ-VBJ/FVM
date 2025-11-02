@@ -119,7 +119,7 @@ void FVM::applyBoundaryConditions(SparseMatrixDIA& A, Vectorb& b, const ScalarPh
     {
         if (dynamic_cast<DirichletCondition*>(pair.second.get()) == nullptr || dynamic_cast<SpatialDirichletCondition*>(pair.second.get()) == nullptr)  
         {
-            std::cout << "Appli (Passe 1 - non-Dirichlet) Patch " << pair.first << std::endl;
+           // std::cout << "Appli (Passe 1 - non-Dirichlet) Patch " << pair.first << std::endl;
             for (const auto& index : phi.getMesh().getBoundaryPatchesNodes(pair.first) )
             {       
                 pair.second->apply(A,b,index,phi);
@@ -131,7 +131,7 @@ void FVM::applyBoundaryConditions(SparseMatrixDIA& A, Vectorb& b, const ScalarPh
     {
         if (dynamic_cast<DirichletCondition*>(pair.second.get()) != nullptr || dynamic_cast<SpatialDirichletCondition*>(pair.second.get()) != nullptr)
         {
-            std::cout << "Appli (Passe 2 - Dirichlet) Patch " << pair.first << std::endl;
+            //std::cout << "Appli (Passe 2 - Dirichlet) Patch " << pair.first << std::endl;
             for (const auto& index : phi.getMesh().getBoundaryPatchesNodes(pair.first) )
             {            
                 pair.second->apply(A,b,index,phi);

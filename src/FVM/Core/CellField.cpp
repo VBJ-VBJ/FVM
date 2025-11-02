@@ -39,6 +39,54 @@ namespace FVM {
         return result;
     }
 
+    ScalarCellField operator-(const ScalarCellField& field1, const ScalarCellField& field2) {
+        if (field1.getSize() != field2.getSize()) {
+            throw std::runtime_error("Les tailles des champs ne correspondent pas pour la soustraction.");
+        }
+
+        ScalarCellField result(field1.getMesh());
+        for (size_t i = 0; i < field1.getSize(); ++i) {
+            result.setField(i, -field2.getField(i) + field1.getField(i));
+        }
+        return result;
+    }
+
+    ScalarCellField operator/(const ScalarCellField& field1, const ScalarCellField& field2) {
+        if (field1.getSize() != field2.getSize()) {
+            throw std::runtime_error("Les tailles des champs ne correspondent pas pour la soustraction.");
+        }
+
+        ScalarCellField result(field1.getMesh());
+        for (size_t i = 0; i < field1.getSize(); ++i) {
+            result.setField(i, field1.getField(i)/ field2.getField(i));
+        }
+        return result;
+    }
+
+    ScalarCellField operator*(const ScalarCellField& field1, const ScalarCellField& field2) {
+        if (field1.getSize() != field2.getSize()) {
+            throw std::runtime_error("Les tailles des champs ne correspondent pas pour la soustraction.");
+        }
+
+        ScalarCellField result(field1.getMesh());
+        for (size_t i = 0; i < field1.getSize(); ++i) {
+            result.setField(i, field2.getField(i)*field1.getField(i));
+        }
+        return result;
+    }
+
+    ScalarCellField operator+(const ScalarCellField& field1, const ScalarCellField& field2) {
+        if (field1.getSize() != field2.getSize()) {
+            throw std::runtime_error("Les tailles des champs ne correspondent pas pour la soustraction.");
+        }
+
+        ScalarCellField result(field1.getMesh());
+        for (size_t i = 0; i < field1.getSize(); ++i) {
+            result.setField(i, -field2.getField(i) + field1.getField(i));
+        }
+        return result;
+    }
+
 
     ScalarCellField operator*(const SparseMatrixDIA& mat, const ScalarCellField& field) {
         if (mat.getSize() != field.getSize()) {
@@ -61,7 +109,15 @@ namespace FVM {
         return result;
     }
 
+    ScalarCellField operator*(double number, const ScalarCellField& field)
+    {
+        ScalarCellField result(field.getMesh());
+        for (size_t i = 0; i < field.getSize(); ++i) {
+            result.setField(i, number*field.getField(i));
+        }
+        return result;
 
+    }
     
 
 }

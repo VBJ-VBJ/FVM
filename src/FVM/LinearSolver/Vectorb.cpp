@@ -64,3 +64,9 @@ double FVM::Vectorb::getNormL2() const
             }
             return std::sqrt(sum);
         }
+
+
+void FVM::Vectorb::setAllZero() 
+{
+    std::fill(data_.begin(), data_.end(), 0.0);
+}

@@ -65,6 +65,9 @@ namespace FVM {
          * @return La norme L2 du vecteur.
          */
         double getNormL2() const;
+
+        void setAllZero();
+
     private:
         std::vector<double> data_;
     };

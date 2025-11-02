@@ -30,6 +30,7 @@ set(FVM_SRC
     # /Discretization 
     ${CMAKE_CURRENT_LIST_DIR}/Discretization/Schemes/GaussLaplacianScheme.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Discretization/SourceTerm/FunctionSource.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Discretization/TimeScheme/EulerImplicitTimeScheme.cpp
 )
 
 add_library(FVM STATIC ${FVM_SRC})
